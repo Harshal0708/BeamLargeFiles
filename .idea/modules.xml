@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BeamLargeFiles.iml" filepath="$PROJECT_DIR$/.idea/modules/BeamLargeFiles.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Application/BeamLargeFiles.Application.iml" filepath="$PROJECT_DIR$/.idea/modules/Application/BeamLargeFiles.Application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Application/BeamLargeFiles.Application.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/Application/BeamLargeFiles.Application.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Application/BeamLargeFiles.Application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Application/BeamLargeFiles.Application.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Application/BeamLargeFiles.Application.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/Application/BeamLargeFiles.Application.unitTest.iml" />
+    </modules>
+  </component>
+</project>
