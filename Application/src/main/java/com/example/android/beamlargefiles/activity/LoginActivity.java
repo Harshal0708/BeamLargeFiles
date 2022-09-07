@@ -1,11 +1,9 @@
 package com.example.android.beamlargefiles.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -28,6 +26,12 @@ public class LoginActivity extends SampleActivityBase {
         etUname = findViewById(R.id.etUN);
         etPass = findViewById(R.id.etPASS);
         btLogin = findViewById(R.id.btLogin);
+
+//        etUname.setText("User1");
+//        etPass.setText("123");
+//        uN="User1";
+//        pS="123";
+//        btLogin.setEnabled(true);
 
         etUname.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {}
@@ -65,7 +69,7 @@ public class LoginActivity extends SampleActivityBase {
 
             if(un.equals("User1")||un.equals("User2")||un.equals("User3")||un.equals("User4")){
                 if(pass.equals("123")){
-                        startActivity(new Intent(this,MainActivity3.class));
+                        startActivity(new Intent(LoginActivity.this, DashbordActivity.class));
                 }else {
                     Toast.makeText(this, "Invalid Password", Toast.LENGTH_SHORT).show();
                 }

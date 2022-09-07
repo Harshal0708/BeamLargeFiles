@@ -44,18 +44,6 @@
         </activity>
         <activity
             android:name="com.example.android.beamlargefiles.activity.FileImportActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.android.beamlargefiles.activity.MainActivity3"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.example.android.beamlargefiles.activity.MainActivity10"
             android:exported="true" >
 
             <!-- <intent-filter> -->
@@ -64,8 +52,14 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name="com.example.android.beamlargefiles.activity.ViewInformationActivity"
-            android:exported="true" />
+            android:name="com.example.android.beamlargefiles.activity.DashbordActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name="com.example.android.common.assetprovider.AssetProvider"

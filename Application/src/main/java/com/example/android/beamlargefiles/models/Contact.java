@@ -7,6 +7,8 @@ public class Contact {
     public String address1;
     public int  amount;
     public String comment;
+    public int totalCollectrdAmount = 0;
+    public String lastpdateDate="-";
 
     public int getSubhasad_code_no() {
         return subhasad_code_no;
@@ -15,9 +17,6 @@ public class Contact {
     public void setSubhasad_code_no(int subhasad_code_no) {
         this.subhasad_code_no = subhasad_code_no;
     }
-
-    public int totalCollectrdAmount = 0;
-    public String lastpdateDate;
 
     public Contact(){   }
     public Contact(int id, int amount, String comment){
@@ -93,14 +92,29 @@ public class Contact {
         this.comment = comment;
     }
 
+//    @Override
+//    public String toString() {
+//        return "{" +
+//                "_id=" + _id +
+//                ", name1='" + name1 + '\'' +
+//                ", address1='" + address1 + '\'' +
+//                ", amount=" + amount +
+//                ", comment='" + comment + '\'' +
+//                '}';
+//    }
+
+
     @Override
     public String toString() {
-        return "Contact{" +
+        return "{" +
                 "_id=" + _id +
+                ", subhasad_code_no=" + subhasad_code_no +
                 ", name1='" + name1 + '\'' +
                 ", address1='" + address1 + '\'' +
                 ", amount=" + amount +
                 ", comment='" + comment + '\'' +
+                ", totalCollectrdAmount=" + totalCollectrdAmount +
+                ", lastpdateDate='" + lastpdateDate + '\'' +
                 '}';
     }
 }

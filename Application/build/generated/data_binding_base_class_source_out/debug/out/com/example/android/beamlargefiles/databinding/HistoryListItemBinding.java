@@ -22,18 +22,30 @@ public final class HistoryListItemBinding implements ViewBinding {
   public final LinearLayout relativeLayout;
 
   @NonNull
-  public final TextView textView;
+  public final TextView tvAmounts;
 
   @NonNull
-  public final TextView tvAddress;
+  public final TextView tvDate;
+
+  @NonNull
+  public final TextView tvNames;
+
+  @NonNull
+  public final TextView tvPDF;
+
+  @NonNull
+  public final TextView tvTotalAmount;
 
   private HistoryListItemBinding(@NonNull LinearLayout rootView,
-      @NonNull LinearLayout relativeLayout, @NonNull TextView textView,
-      @NonNull TextView tvAddress) {
+      @NonNull LinearLayout relativeLayout, @NonNull TextView tvAmounts, @NonNull TextView tvDate,
+      @NonNull TextView tvNames, @NonNull TextView tvPDF, @NonNull TextView tvTotalAmount) {
     this.rootView = rootView;
     this.relativeLayout = relativeLayout;
-    this.textView = textView;
-    this.tvAddress = tvAddress;
+    this.tvAmounts = tvAmounts;
+    this.tvDate = tvDate;
+    this.tvNames = tvNames;
+    this.tvPDF = tvPDF;
+    this.tvTotalAmount = tvTotalAmount;
   }
 
   @Override
@@ -65,20 +77,38 @@ public final class HistoryListItemBinding implements ViewBinding {
     missingId: {
       LinearLayout relativeLayout = (LinearLayout) rootView;
 
-      id = R.id.textView;
-      TextView textView = rootView.findViewById(id);
-      if (textView == null) {
+      id = R.id.tvAmounts;
+      TextView tvAmounts = rootView.findViewById(id);
+      if (tvAmounts == null) {
         break missingId;
       }
 
-      id = R.id.tvAddress;
-      TextView tvAddress = rootView.findViewById(id);
-      if (tvAddress == null) {
+      id = R.id.tvDate;
+      TextView tvDate = rootView.findViewById(id);
+      if (tvDate == null) {
         break missingId;
       }
 
-      return new HistoryListItemBinding((LinearLayout) rootView, relativeLayout, textView,
-          tvAddress);
+      id = R.id.tvNames;
+      TextView tvNames = rootView.findViewById(id);
+      if (tvNames == null) {
+        break missingId;
+      }
+
+      id = R.id.tvPDF;
+      TextView tvPDF = rootView.findViewById(id);
+      if (tvPDF == null) {
+        break missingId;
+      }
+
+      id = R.id.tvTotalAmount;
+      TextView tvTotalAmount = rootView.findViewById(id);
+      if (tvTotalAmount == null) {
+        break missingId;
+      }
+
+      return new HistoryListItemBinding((LinearLayout) rootView, relativeLayout, tvAmounts, tvDate,
+          tvNames, tvPDF, tvTotalAmount);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

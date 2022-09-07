@@ -8,6 +8,7 @@
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/drawable-xhdpi/border_select.xml" value="0.147" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout-sw600dp/history_list_item.xml" value="0.1" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/activity_createv_cars.xml" value="0.12526041666666668" />
+        <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/activity_dashbord.xml" value="0.1" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/activity_file_import.xml" value="0.12526041666666668" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/activity_login.xml" value="0.12708333333333333" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/activity_main.xml" value="0.2056434373663959" />
@@ -25,8 +26,8 @@
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/exportpopup.xml" value="0.128" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/fragment_home.xml" value="0.12526041666666668" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/fragment_home2.xml" value="0.12526041666666668" />
-        <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/history_list_item.xml" value="0.16" />
-        <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/list_item.xml" value="0.136" />
+        <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/history_list_item.xml" value="0.264" />
+        <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/list_item.xml" value="0.264" />
         <entry key="Application/src/main/res/drawable-xhdpi/border.xml" value="0.1155" />
         <entry key="Application/src/main/res/layout-sw600dp-land/activity_main.xml" value="0.176171875" />
         <entry key="Application/src/main/res/layout-sw600dp/activity_main.xml" value="0.174609375" />

@@ -8,10 +8,8 @@ com/example/android/beamlargefiles/utils/DatabaseHandler.java
  com.example.android.beamlargefiles.utils.DatabaseHandler
 com/example/android/common/activities/SampleActivityBase.java
  com.example.android.common.activities.SampleActivityBase
-com/example/android/beamlargefiles/adapter/MyListAdapter.java
- com.example.android.beamlargefiles.adapter.MyListAdapter
- com.example.android.beamlargefiles.adapter.MyListAdapter$ItemClickListener
- com.example.android.beamlargefiles.adapter.MyListAdapter$ViewHolder
+com/example/android/beamlargefiles/singleton/SingletonClass.java
+ com.example.android.beamlargefiles.singleton.SingletonClass
 com/example/android/beamlargefiles/models/HistoryListItem.java
  com.example.android.beamlargefiles.models.HistoryListItem
 com/example/android/common/logger/LogWrapper.java
@@ -33,10 +31,6 @@ com/example/android/common/logger/LogView.java
  com.example.android.common.logger.LogView$1
 com/example/android/beamlargefiles/databinding/ActivityFileImportBinding.java
  com.example.android.beamlargefiles.databinding.ActivityFileImportBinding
-com/example/android/beamlargefiles/activity/ViewInformationActivity.java
- com.example.android.beamlargefiles.activity.ViewInformationActivity
-com/example/android/beamlargefiles/databinding/ActivityMain10Binding.java
- com.example.android.beamlargefiles.databinding.ActivityMain10Binding
 com/example/android/beamlargefiles/databinding/CustomviewBinding.java
  com.example.android.beamlargefiles.databinding.CustomviewBinding
 com/example/android/beamlargefiles/databinding/ActivityViewTransactionHistoryBinding.java
@@ -47,29 +41,24 @@ com/example/android/beamlargefiles/adapter/HistoryListItemAdapter.java
 com/example/android/common/logger/LogFragment.java
  com.example.android.common.logger.LogFragment
  com.example.android.common.logger.LogFragment$1
-com/example/android/beamlargefiles/databinding/ActivityViewInformationBinding.java
- com.example.android.beamlargefiles.databinding.ActivityViewInformationBinding
-com/example/android/beamlargefiles/databinding/ActivityMain3Binding.java
- com.example.android.beamlargefiles.databinding.ActivityMain3Binding
+com/example/android/beamlargefiles/databinding/ActivityDashbordBinding.java
+ com.example.android.beamlargefiles.databinding.ActivityDashbordBinding
 com/example/android/beamlargefiles/activity/ViewTransactionHistoryActivity.java
  com.example.android.beamlargefiles.activity.ViewTransactionHistoryActivity
-com/example/android/beamlargefiles/activity/MainActivity10.java
- com.example.android.beamlargefiles.activity.MainActivity10
 com/example/android/beamlargefiles/databinding/ActivityLoginBinding.java
  com.example.android.beamlargefiles.databinding.ActivityLoginBinding
-com/example/android/beamlargefiles/activity/MainActivity3.java
- com.example.android.beamlargefiles.activity.MainActivity3
- com.example.android.beamlargefiles.activity.MainActivity3$1
- com.example.android.beamlargefiles.activity.MainActivity3$2
- com.example.android.beamlargefiles.activity.MainActivity3$3
- com.example.android.beamlargefiles.activity.MainActivity3$4
+com/example/android/beamlargefiles/BuildConfig.java
+ com.example.android.beamlargefiles.BuildConfig
 com/example/android/beamlargefiles/databinding/HistoryListItemBinding.java
  com.example.android.beamlargefiles.databinding.HistoryListItemBinding
 com/example/android/beamlargefiles/activity/LoginActivity.java
  com.example.android.beamlargefiles.activity.LoginActivity
  com.example.android.beamlargefiles.activity.LoginActivity$1
  com.example.android.beamlargefiles.activity.LoginActivity$2
-com/example/android/beamlargefiles/singleton/SingletonClass.java
- com.example.android.beamlargefiles.singleton.SingletonClass
-com/example/android/beamlargefiles/BuildConfig.java
- com.example.android.beamlargefiles.BuildConfig
+com/example/android/beamlargefiles/activity/DashbordActivity.java
+ com.example.android.beamlargefiles.activity.DashbordActivity
+ com.example.android.beamlargefiles.activity.DashbordActivity$1
+com/example/android/beamlargefiles/adapter/MyListAdapter.java
+ com.example.android.beamlargefiles.adapter.MyListAdapter
+ com.example.android.beamlargefiles.adapter.MyListAdapter$ItemClickListener
+ com.example.android.beamlargefiles.adapter.MyListAdapter$ViewHolder

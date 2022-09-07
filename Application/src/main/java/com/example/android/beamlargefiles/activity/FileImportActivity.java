@@ -51,7 +51,9 @@ public class FileImportActivity extends AppCompatActivity {
             });
         }
         protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-            if (requestCode == PICK_FROM_GALLERY && resultCode == RESULT_OK) {
+            if (
+//                    requestCode == PICK_FROM_GALLERY &&
+                    resultCode == RESULT_OK) {
                 URI = data.getData();
                 tvAttachment.setText(URI.getLastPathSegment());
                 tvAttachment.setVisibility(View.VISIBLE);
@@ -77,7 +79,7 @@ public class FileImportActivity extends AppCompatActivity {
         }
         public void openFolder() {
             Intent intent = new Intent();
-            intent.setType("image/*");
+            intent.setType("*/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             intent.putExtra("return-data", true);
             startActivityForResult(Intent.createChooser(intent, "Complete action using"), PICK_FROM_GALLERY);

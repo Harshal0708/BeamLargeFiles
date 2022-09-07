@@ -20,6 +20,10 @@
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\activity_file_import.xml"
     },
     {
+        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_dashbord.xml",
+        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\activity_dashbord.xml"
+    },
+    {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_home.xml",
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\activity_home.xml"
     },

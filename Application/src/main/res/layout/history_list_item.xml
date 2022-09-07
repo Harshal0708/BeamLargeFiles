@@ -15,27 +15,61 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="date"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tvPDF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+
+                    android:textSize="16sp" />
+<!--                android:text="  PDF Download"-->
+            </LinearLayout>
+
+
+
+<!--            <ScrollView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:scrollbars="horizontal">-->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/tvNames"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
                     android:gravity="center_vertical"
-                    android:text="Name"
-                    android:textStyle="bold"
-                    android:textSize="16sp" />
+                    android:text="Names List"
+                    android:textSize="14sp" />
                 <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="name"
-                    android:textSize="16sp"
-                    />
+                    android:id="@+id/tvAmounts"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="end"
+                    android:text="Amount List"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
             </LinearLayout>
+<!--            </ScrollView>-->
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="@color/gray"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -45,128 +79,18 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:gravity="center_vertical"
-                    android:text="Account Opening Date"
                     android:textStyle="bold"
                     android:textSize="14sp" />
                 <TextView
-                    android:id="@+id/tvAddress"
+                    android:id="@+id/tvTotalAmount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:gravity="center_vertical"
-                    android:text="Date"
+                    android:gravity="end"
+                    android:text="Total Amount"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
             </LinearLayout>
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:orientation="horizontal">-->
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="2"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:text="AC No"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:textSize="14sp" />-->
-<!--                <TextView-->
-<!--                    android:id="@+id/tvACno"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="2"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:text="AC no"-->
-<!--                    android:textSize="14sp" />-->
-<!--            </LinearLayout>-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:orientation="horizontal">-->
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="2"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:text="Phone No"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:textSize="14sp" />-->
-<!--                <TextView-->
-<!--                    android:id="@+id/tvMobileNo"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="2"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:text="Mobile No"-->
-<!--                    android:textSize="14sp" />-->
-<!--            </LinearLayout>-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:orientation="horizontal">-->
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="2"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:text="Current Balance"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:textSize="14sp" />-->
-<!--                <TextView-->
-<!--                    android:id="@+id/tvAmount"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="2"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:text="Amount"-->
-<!--                    android:textSize="14sp" />-->
-<!--            </LinearLayout>-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:orientation="horizontal">-->
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="2"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:text="Last Collected Amount Date"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:textSize="14sp" />-->
-<!--                <TextView-->
-<!--                    android:id="@+id/tvAmountLastDate"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="2"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:text="Last Amount Date"-->
-<!--                    android:textSize="14sp" />-->
-<!--            </LinearLayout>-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:orientation="horizontal">-->
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="2"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:text="Last Amount"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:textSize="14sp" />-->
-<!--                <TextView-->
-<!--                    android:id="@+id/tvAmountSub"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="2"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:text="Amount"-->
-<!--                    android:textSize="14sp" />-->
-<!--            </LinearLayout>-->
 
         </LinearLayout>
 

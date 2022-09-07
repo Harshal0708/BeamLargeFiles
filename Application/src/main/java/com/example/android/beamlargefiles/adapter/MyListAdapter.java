@@ -51,8 +51,10 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
         holder.tvAmountLastDate.setText(": "+listdata[position].getLastpdateDate());
         holder.tvACno.setText(": "+listdata[position].getSubhasad_code_no());
         holder.tvMobileNo.setText(": - ");
-        if(listdata[position].getComment().toString() != "000000"){
-            holder.tvAmountSub.setText(": "+listdata[position].getTotalCollectrdAmount());
+        if(listdata[position].getComment().equals("000000")){
+            holder.tvAmountSub.setText(": 0");
+        }else {
+            holder.tvAmountSub.setText(": "+listdata[position].getComment());
         }
         String today = getCurrentDate();
         String itemDAte = listdata[position].getLastpdateDate();
@@ -114,7 +116,4 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
         void onItemClickListener(int position, View view,Contact listItem);
     }
 
-    public void selectedItem() {
-        notifyDataSetChanged();
-    }
 }
