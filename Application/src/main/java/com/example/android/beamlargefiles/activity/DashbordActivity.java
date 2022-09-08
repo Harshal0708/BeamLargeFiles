@@ -18,6 +18,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -55,6 +56,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -63,6 +65,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DashbordActivity extends SampleActivityBase implements MyListAdapter.ItemClickListener, DatePickerDialog.OnDateSetListener {
 
@@ -201,7 +205,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
                         toDayList.add(listdata.get(k));
                     }
                 }
-                setTodayTotal(toDayList);
+//                setTodayTotal(toDayList);
                 setAdapterData(listData2);
                 adapter.notifyDataSetChanged();
             }
@@ -548,13 +552,35 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
     }
 
     public void setTodayTotal(ArrayList<Contact> toDayList) {
+        ArrayList<Object> listdata = new ArrayList<Object>();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        if(sp.getString("key", null)!=null){
+            String jsonText2 = "{Contact:["+sp.getString("key", null)+"]}";
+            //Converting jsonData string into JSON object
+            JSONObject jsnobject = null;
+            try {
+                jsnobject = new JSONObject(jsonText2);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-        int todayCollectedCount = toDayList.size();
+            try {
+                JSONArray jsonArray = jsnobject.getJSONArray("Contact");
+                if (jsonArray != null) {
+                    for (int i=0;i<jsonArray.length();i++){
+                        listdata.add(jsonArray.get(i));
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         int todayCollectedAmount = 0;
         for (Contact i : toDayList) {
             todayCollectedAmount = todayCollectedAmount + i.getTotalCollectrdAmount();
         }
-        tvTotalTransacion.setText("" + todayCollectedCount);
+        tvTotalTransacion.setText("" + listdata.size());
         tvTotalTransacionAmount.setText("" + todayCollectedAmount);
     }
 
@@ -649,85 +675,12 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 
     public void sendEmail() {
         FileWriter fw = null;
-        File file = null;
-        FileWriter fw2 = null;
         try {
-            File vdfdirectory = new File(
-                    Environment.getExternalStorageDirectory() + VCF_DIRECTORY);
-            // have the object build the directory structure, if needed.
+            File vdfdirectory = new File(Environment.getExternalStorageDirectory() + VCF_DIRECTORY);
             if (!vdfdirectory.exists()) {
                 vdfdirectory.mkdirs();
             }
-            file = new File(vdfdirectory, "share_file.dat");
-            FileOutputStream fOut = new FileOutputStream(file);
-            vcfFile = new File(vdfdirectory, "android_share_file.dat");
-            fw = new FileWriter(vcfFile);
-            fw2 = new FileWriter(file);
-            DatabaseHandler db = new DatabaseHandler(this);
-            List<Contact> contacts = db.getAllContacts();
-            try {
-                for (Contact cn : contacts) {
-                    String log = cn.getID() + "," + cn.getComment() + "," + cn.getName() + "," + cn.getAmount() + "," + cn.getAddress() + "," + cn.getComment() + "\n";
-                    fw.write(log);
-                    fw2.write(log);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            fw.close();
-            fOut.flush();
-            fOut.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.d(" IOException : ", "");
-        }
-
-        try {
-            Intent emailIntent = new Intent(Intent.ACTION_SEND);
-            Uri path = Uri.fromFile(vcfFile);
-            File filelocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "android_share_file.txt");
-            Uri path2 = Uri.fromFile(filelocation);
-            emailIntent.setAction(Intent.ACTION_SEND);
-            emailIntent.putExtra(Intent.EXTRA_STREAM, vcfFile);
-            emailIntent.setType("text/plain");
-            startActivity(Intent.createChooser(emailIntent, "Sending email..."));
-        } catch (Throwable t) {
-            Toast.makeText(this, "Request failed try again: " + t.toString(), Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public boolean isStoragePermissionGranted() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
-                Log.v(TAG, "Permission is granted");
-//                savevCardData();
-                return true;
-            } else {
-
-                Log.v(TAG, "Permission is revoked");
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                return false;
-            }
-        } else { //permission is automatically granted on sdk<23 upon installation
-            Log.v(TAG, "Permission is granted");
-            return true;
-        }
-    }
-
-    public void savevCardData() {
-
-        try {
-            File vdfdirectory = new File(
-                    Environment.getExternalStorageDirectory() + VCF_DIRECTORY);
-            if (!vdfdirectory.exists()) {
-                vdfdirectory.mkdirs();
-            }
-            DateFormat df = new SimpleDateFormat("dd/MM/yyyy_KK:mm:ss_a", Locale.getDefault());
-            String currentDateAndTime = df.format(new Date());
-            String replaceStr1 = currentDateAndTime.replace(':', '_');
-            vcfFile = new File("/storage/emulated/0/Loan_Tracker", "pcrx.dat");
-            FileWriter fw = null;
+            vcfFile = new File(vdfdirectory, "pcrx.dat");
             fw = new FileWriter(vcfFile);
             DatabaseHandler db = new DatabaseHandler(this);
             List<Contact> contacts = db.getAllContacts();
@@ -891,18 +844,218 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
                 e.printStackTrace();
             }
             fw.close();
-            showAlert("File Saved in Loan_Tracker Folder!");
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-//                    EXTERNAL_STORAGE_PERMISSION_CODE);
-//
-//            // getExternalStoragePublicDirectory() represents root of external storage, we are using DOWNLOADS
-//            // We can use following directories: MUSIC, PODCASTS, ALARMS, RINGTONES, NOTIFICATIONS, PICTURES, MOVIES
-//            File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-//
-//            // Storing the data in file with name as geeksData.txt
-//            File file = new File(folder, "pcrx.dat");
-////            writeTextData(file, editTextData);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d(" IOException : ", "");
+        }
 
+        File fileToShare = vcfFile;
+        if (fileToShare == null || !fileToShare.exists()) {
+            Toast.makeText(this, "text_generated_file_error", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+        Uri apkURI = FileProvider.getUriForFile(getApplicationContext(),getApplicationContext().getPackageName() + ".provider", fileToShare);
+        intentShareFile.setDataAndType(apkURI, URLConnection.guessContentTypeFromName(fileToShare.getName()));
+        intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intentShareFile.putExtra(Intent.EXTRA_STREAM,apkURI);
+        startActivity(Intent.createChooser(intentShareFile, "Share File"));
+    }
+
+    public boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG, "Permission is granted");
+//                savevCardData();
+                return true;
+            } else {
+
+                Log.v(TAG, "Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG, "Permission is granted");
+            return true;
+        }
+    }
+
+    public void savevCardData() {
+
+        try {
+            File vdfdirectory = new File(
+                    Environment.getExternalStorageDirectory() + VCF_DIRECTORY);
+            if (!vdfdirectory.exists()) {
+                vdfdirectory.mkdirs();
+            }
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy_KK:mm:ss_a", Locale.getDefault());
+            String currentDateAndTime = df.format(new Date());
+            String replaceStr1 = currentDateAndTime.replace(':', '_');
+            vcfFile = new File("/storage/emulated/0/Loan_Tracker", "pcrx.dat");
+            FileWriter fw = null;
+            fw = new FileWriter(vcfFile);
+            DatabaseHandler db = new DatabaseHandler(this);
+            List<Contact> contacts = db.getAllContacts();
+            try {
+                ArrayList<Contact> toDayList = new ArrayList<Contact>();
+                for (int i = 0; i < contacts.size(); i++) {
+                    Contact cn = contacts.get(i);
+                    myListData2[i] = new Contact(cn.getID(),
+                            cn.getSubhasad_code_no(),
+                            cn.getName(), cn.getAddress(),
+                            cn.getAmount(), cn.getComment(),
+                            cn.getTotalCollectrdAmount(), cn.getLastpdateDate());
+                    if (cn.getLastpdateDate().equals("-")) {
+                    } else {
+                        toDayList.add(cn);
+                    }
+                }
+                int todayCollectedCount = toDayList.size();
+                int todayCollectedAmount = 0;
+                for (Contact i : toDayList) {
+                    todayCollectedAmount = todayCollectedAmount + i.getTotalCollectrdAmount();
+                }
+
+                int countRemainig1 = 6 - String.valueOf(todayCollectedCount).length();
+                String addZero1 = "";
+                for (int i = 0; i < countRemainig1; i++) {
+                    addZero1 = addZero1.concat("0");
+                }
+                int countRemainig2 = 6 - String.valueOf(todayCollectedAmount).length();
+                String addZero2 = "";
+                for (int i = 0; i < countRemainig2; i++) {
+                    addZero2 = addZero2.concat("0");
+                }
+
+                int countRemainig112 = 13 - String.valueOf(todayCollectedAmount).length();
+                String addZero112 = "";
+                for (int i = 0; i < countRemainig112; i++) {
+                    addZero112 = addZero112.concat(" ");
+                }
+
+                String cDate = getCurrentDate().replace('/', '.');
+                fw.write("  1000" +
+                        "," + addZero1 + todayCollectedCount +
+                        "," + addZero2 + (int) todayCollectedAmount + addZero112 +
+                        ",001001" +
+                        "," + cDate +
+                        "," + "12341234\n");
+                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+                String jsonText2 = "{Contact:[" + sp.getString("key", null) + "]}";
+                //Converting jsonData string into JSON object
+                JSONObject jsnobject = null;
+                try {
+                    jsnobject = new JSONObject(jsonText2);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ArrayList<Object> listdata = new ArrayList<Object>();
+                try {
+                    JSONArray jsonArray = jsnobject.getJSONArray("Contact");
+                    if (jsonArray != null) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            listdata.add(jsonArray.get(i));
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ArrayList<Contact> updatedList = new ArrayList<>(listdata.size());
+                Gson gson = new Gson();
+                for (int i = 0; i < listdata.size(); i++) {
+                    JSONObject obj = (JSONObject) listdata.get(i);
+                    Contact user = gson.fromJson(String.valueOf(obj), Contact.class);
+                    updatedList.add(user);
+                }
+
+                for (Contact cn : contacts) {
+                    for (int i = 0; i < updatedList.size(); i++) {
+                        if (updatedList.get(i).getID() == cn.getID() && updatedList.get(i).getLastpdateDate().equals(cn.getLastpdateDate())) {
+                            cn = updatedList.get(i);
+                            updatedList.remove(i);
+                        }
+                    }
+
+                    int count = cn.getComment().length();
+                    int countRemainig = 6 - count;
+                    String addZero = "";
+                    for (int i = 0; i < countRemainig; i++) {
+                        addZero = addZero.concat("0");
+                    }
+
+                    int count11 = (int) (Math.log10(cn.getSubhasad_code_no()) + 1);
+                    int countRemainig11 = 6 - count11;
+                    String addZero11 = "";
+                    for (int i = 0; i < countRemainig11; i++) {
+                        addZero11 = addZero11.concat(" ");
+                    }
+
+                    int count22 = cn.getName().length();
+                    int countRemainig22 = 16 - count22;
+                    String addZero22 = "";
+                    for (int i = 0; i < countRemainig22; i++) {
+                        addZero22 = addZero22.concat(" ");
+                    }
+
+                    int count227 = String.valueOf(cn.getAmount()).length();
+                    int countRemainig227 = 6 - count227;
+                    String addZero227 = "";
+                    for (int i = 0; i < countRemainig227; i++) {
+                        addZero227 = addZero227.concat("0");
+                    }
+
+                    String log = addZero11 + cn.getSubhasad_code_no() + "," + addZero + cn.getComment() + "," + cn.getName() + addZero22 + "," + addZero227 + (int) cn.getAmount() + "," + cn.getLastpdateDate() + "," + addZero + cn.getComment() + "  " + "\n";
+
+                    if (cn.getComment().equals("000000")) {  //m_sDate
+
+                    } else {
+                        fw.write(log);
+                    }
+                }
+
+                for (Contact cn : updatedList) {
+                    int count = cn.getComment().length();
+                    int countRemainig = 6 - count;
+                    String addZero = "";
+                    for (int i = 0; i < countRemainig; i++) {
+                        addZero = addZero.concat("0");
+                    }
+
+                    int count11 = (int) (Math.log10(cn.getSubhasad_code_no()) + 1);
+                    int countRemainig11 = 6 - count11;
+                    String addZero11 = "";
+                    for (int i = 0; i < countRemainig11; i++) {
+                        addZero11 = addZero11.concat(" ");
+                    }
+
+                    int count22 = cn.getName().length();
+                    int countRemainig22 = 16 - count22;
+                    String addZero22 = "";
+                    for (int i = 0; i < countRemainig22; i++) {
+                        addZero22 = addZero22.concat(" ");
+                    }
+
+                    int count227 = String.valueOf(cn.getAmount()).length();
+                    int countRemainig227 = 6 - count227;
+                    String addZero227 = "";
+                    for (int i = 0; i < countRemainig227; i++) {
+                        addZero227 = addZero227.concat("0");
+                    }
+
+                    String log = addZero11 + cn.getSubhasad_code_no() + "," + addZero + cn.getComment() + "," + cn.getName() + addZero22 + "," + addZero227 + (int) cn.getAmount() + "," + cn.getLastpdateDate() + "," + addZero + cn.getComment() + "  " + "\n";
+
+                    if (cn.getComment().equals("000000")) {  //m_sDate
+                    } else {
+                        fw.write(log);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            fw.close();
+            showAlert("File Saved in Loan_Tracker Folder!");
         } catch (IOException e) {
             e.printStackTrace();
             Log.d(" IOException : ", "");
