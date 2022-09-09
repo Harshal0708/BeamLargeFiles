@@ -1,9 +1,5 @@
 com/example/android/beamlargefiles/databinding/ListItemBinding.java
  com.example.android.beamlargefiles.databinding.ListItemBinding
-com/example/android/beamlargefiles/activity/FileImportActivity.java
- com.example.android.beamlargefiles.activity.FileImportActivity
- com.example.android.beamlargefiles.activity.FileImportActivity$1
- com.example.android.beamlargefiles.activity.FileImportActivity$2
 com/example/android/beamlargefiles/utils/DatabaseHandler.java
  com.example.android.beamlargefiles.utils.DatabaseHandler
 com/example/android/common/activities/SampleActivityBase.java
@@ -31,8 +27,6 @@ com/example/android/common/assetprovider/AssetProvider.java
 com/example/android/common/logger/LogView.java
  com.example.android.common.logger.LogView
  com.example.android.common.logger.LogView$1
-com/example/android/beamlargefiles/databinding/ActivityFileImportBinding.java
- com.example.android.beamlargefiles.databinding.ActivityFileImportBinding
 com/example/android/beamlargefiles/databinding/CustomviewBinding.java
  com.example.android.beamlargefiles.databinding.CustomviewBinding
 com/example/android/beamlargefiles/databinding/ActivityViewTransactionHistoryBinding.java

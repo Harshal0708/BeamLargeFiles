@@ -1,20 +1,20 @@
 -- Merging decision tree log ---
 provider#android.support.v4.content.FileProvider
-INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:59:9-67:20
+INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:50:9-58:20
 	android:grantUriPermissions
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:63:13-47
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:54:13-47
 	android:authorities
 		INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:61:13-60
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:52:13-60
 	android:exported
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:62:13-37
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:53:13-37
 	android:name
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:60:13-67
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:51:13-67
 manifest
-ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:2:1-70:12
-INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:2:1-70:12
-INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:2:1-70:12
-INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:2:1-70:12
+ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:2:1-61:12
+INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:2:1-61:12
+INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:2:1-61:12
+INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:2:1-61:12
 MERGED from [com.android.databinding:viewbinding:4.2.2] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\f61c3f67df8f6257b3161f54385262c2\viewbinding-4.2.2\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:design:28.0.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\5c77575677e88c861fe7832a575236ec\design-28.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\96d6faed5a5735fd14bdec9d38b8895e\recyclerview-v7-28.0.0\AndroidManifest.xml:17:1-22:12
@@ -50,9 +50,9 @@ MERGED from [com.android.support:interpolator:28.0.0] C:\Users\admin\.gradle\cac
 MERGED from [com.android.support:documentfile:28.0.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\8a3c3bd212458805be563f8e82222fa4\documentfile-28.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\66637a71ed7b0c19bdb2a6d0f62c6df5\localbroadcastmanager-28.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:print:28.0.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\5adae96c5ac7f4b2080edbd6fb7d9552\print-28.0.0\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:2:1-70:12
-INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:2:1-70:12
-INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:2:1-70:12
+INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:2:1-61:12
+INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:2:1-61:12
+INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:2:1-61:12
 	package
 		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:3:5-49
 		INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml
@@ -94,7 +94,7 @@ ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\ma
 	android:name
 		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:18:22-76
 application
-ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:20:5-68:19
+ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:20:5-59:19
 MERGED from [com.android.support:design:28.0.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\5c77575677e88c861fe7832a575236ec\design-28.0.0\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\5c77575677e88c861fe7832a575236ec\design-28.0.0\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support.constraint:constraint-layout:2.0.4] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c7bfde8d582ff2cc6a90531565338aff\constraint-layout-2.0.4\AndroidManifest.xml:9:5-20
@@ -115,48 +115,42 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\admin\.gra
 		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:24:9-40
 	android:usesCleartextTraffic
 		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:25:9-44
-activity#com.example.android.beamlargefiles.activity.ViewTransactionHistoryActivity
-ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:27:9-29:40
-	android:exported
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:29:13-37
-	android:name
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:28:13-68
 activity#com.example.android.beamlargefiles.activity.LoginActivity
-ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:30:9-37:20
+ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:26:9-33:20
 	android:exported
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:32:13-36
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:28:13-36
 	android:name
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:31:13-51
-activity#com.example.android.beamlargefiles.activity.FileImportActivity
-ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:38:9-45:20
-	android:exported
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:40:13-36
-	android:name
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:39:13-56
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:27:13-51
 activity#com.example.android.beamlargefiles.activity.DashbordActivity
-ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:46:9-53:20
+ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:34:9-41:20
 	android:exported
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:48:13-36
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:36:13-36
 	android:name
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:47:13-54
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:35:13-54
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:49:13-52:29
+ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:37:13-40:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:50:17-69
+ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:38:17-69
 	android:name
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:50:25-66
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:38:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:51:17-77
+ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:39:17-77
 	android:name
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:51:27-74
-provider#com.example.android.common.assetprovider.AssetProvider
-ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:55:9-58:39
-	android:authorities
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:57:13-75
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:39:27-74
+activity#com.example.android.beamlargefiles.activity.ViewTransactionHistoryActivity
+ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:42:9-44:40
 	android:exported
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:58:13-36
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:44:13-37
 	android:name
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:56:13-82
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:43:13-68
+provider#com.example.android.common.assetprovider.AssetProvider
+ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:46:9-49:39
+	android:authorities
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:48:13-75
+	android:exported
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:49:13-36
+	android:name
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:47:13-82
 uses-sdk
 INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml
@@ -242,8 +236,8 @@ INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src
 		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:64:13-66:58
+ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:55:13-57:58
 	android:resource
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:66:17-55
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:57:17-55
 	android:name
-		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:65:17-67
+		ADDED from C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:56:17-67

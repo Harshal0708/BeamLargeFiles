@@ -1237,14 +1237,12 @@ id beginning
 id blocking
 id bottom
 id bounce
-id btAttachment
 id btEmail1
 id btImportFile
 id btImportFile1
 id btLogin
 id btPickDate
 id btSave1
-id btSend
 id btViewInfoData
 id buttonOk
 id buttonPanel
@@ -1301,11 +1299,8 @@ id enterAlways
 id enterAlwaysCollapsed
 id etAmount
 id etComment
-id etMessage
 id etPASS
 id etSearch
-id etSubject
-id etTo
 id etUN
 id exitUntilCollapsed
 id expand_activities_button
@@ -1483,7 +1478,6 @@ id tvAmount
 id tvAmountLastDate
 id tvAmountSub
 id tvAmounts
-id tvAttachment
 id tvDate
 id tvMobileNo
 id tvNames
@@ -1549,7 +1543,6 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_dashbord
-layout activity_file_import
 layout activity_login
 layout activity_view_transaction_history
 layout customview

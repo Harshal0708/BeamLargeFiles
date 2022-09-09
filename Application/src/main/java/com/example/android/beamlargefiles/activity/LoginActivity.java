@@ -38,7 +38,6 @@ public class LoginActivity extends SampleActivityBase {
             public void beforeTextChanged(CharSequence s, int start,int count, int after) {}
             public void onTextChanged(CharSequence s, int start,int before, int count) {
 //                Field2.getText().clear();
-                Log.d("UN : ",etUname.getText().toString().trim());
                 uN = etUname.getText().toString().trim();
                 if(uN.isEmpty()||pS.isEmpty()){
                     btLogin.setEnabled(false);
@@ -52,7 +51,6 @@ public class LoginActivity extends SampleActivityBase {
             public void beforeTextChanged(CharSequence s, int start,int count, int after) {}
             public void onTextChanged(CharSequence s, int start,int before, int count) {
 //                Field2.getText().clear();
-                Log.d("pass : ",etPass.getText().toString().trim());
                 pS = etPass.getText().toString().trim();
                 if(uN.isEmpty()||pS.isEmpty()){
                     btLogin.setEnabled(false);

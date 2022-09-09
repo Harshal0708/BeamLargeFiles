@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -32,7 +33,6 @@ public class ViewTransactionHistoryActivity extends SampleActivityBase {
     RecyclerView recyclerView;
 //    TextView tvNodata;
     HistoryListItemAdapter adapter;
-    Contact[] myListData2;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +44,9 @@ public class ViewTransactionHistoryActivity extends SampleActivityBase {
         });
 
         recyclerView = findViewById(R.id.rvList);
-//        tvNodata = findViewById(R.id.tvNodata);
-
-        DatabaseHandler db = new DatabaseHandler(this);
-        List<Contact> contacts = db.getAllContacts();
-
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         if(sp.getString("key", null)!=null){
             String jsonText2 = "{Contact:["+sp.getString("key", null)+"]}";
-            //Converting jsonData string into JSON object
             JSONObject jsnobject = null;
             try {
                 jsnobject = new JSONObject(jsonText2);
@@ -77,27 +71,23 @@ public class ViewTransactionHistoryActivity extends SampleActivityBase {
                 Contact user= gson.fromJson(String.valueOf(obj), Contact.class);
                 updatedList.add(user);
             }
-
-            Map<String, List<Contact>> studlistGrouped =
-                    updatedList.stream().collect(Collectors.groupingBy(w -> w.lastpdateDate));
+            Map<String, List<Contact>> studlistGrouped = updatedList.stream().collect(Collectors.groupingBy(w -> w.lastpdateDate));
             setAdapterData(studlistGrouped);
         }
-
     }
-
 
     public void setAdapterData(Map<String, List<Contact>> listData){
         ArrayList<HistoryListItem> list = new ArrayList<>();
         for (String key : listData.keySet()) {
-            System.out.println(key + "," + listData.get(key));
             if(key.equals("-")){
             }else {
-                list.add(new HistoryListItem(key,new ArrayList<Contact>(listData.get(key))));
+                list.add(new HistoryListItem(Integer.parseInt(key.substring(0,2)),key,new ArrayList<Contact>(listData.get(key))));
             }
         }
-
+        Collections.sort(list);
         adapter = new HistoryListItemAdapter(this,list);
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 //        if(list.size()!=0){
@@ -105,6 +95,19 @@ public class ViewTransactionHistoryActivity extends SampleActivityBase {
 //        }else {
 //            tvNodata.setVisibility(View.VISIBLE);
 //        }
+    }
+
+    public ArrayList<HistoryListItem> reverseArrayList(ArrayList<HistoryListItem> alist)
+    {
+        // Arraylist for storing reversed elements
+        ArrayList<HistoryListItem> revArrayList = new ArrayList<HistoryListItem>();
+        for (int i = alist.size() - 1; i >= 0; i--) {
+            // Append the elements in reverse order
+            revArrayList.add(alist.get(i));
+        }
+
+        // Return the reversed arraylist
+        return revArrayList;
     }
 
 }

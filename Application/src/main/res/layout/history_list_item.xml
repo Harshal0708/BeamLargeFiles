@@ -36,12 +36,6 @@
 <!--                android:text="  PDF Download"-->
             </LinearLayout>
 
-
-
-<!--            <ScrollView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="80dp"-->
-<!--                android:scrollbars="horizontal">-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -50,21 +44,22 @@
                     android:id="@+id/tvNames"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:gravity="center_vertical"
+                    android:scrollbars = "vertical"
                     android:text="Names List"
                     android:textSize="14sp" />
                 <TextView
                     android:id="@+id/tvAmounts"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="2.5"
                     android:gravity="end"
+                    android:scrollbars = "vertical"
                     android:text="Amount List"
                     android:textStyle="bold"
                     android:textSize="14sp" />
             </LinearLayout>
-<!--            </ScrollView>-->
 
             <View
                 android:layout_width="match_parent"
