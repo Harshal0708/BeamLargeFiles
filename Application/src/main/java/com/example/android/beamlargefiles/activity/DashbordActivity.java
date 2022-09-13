@@ -8,11 +8,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.OpenableColumns;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -71,10 +78,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class DashbordActivity extends SampleActivityBase implements MyListAdapter.ItemClickListener, DatePickerDialog.OnDateSetListener {
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-    private String filename = "SampleFile.txt";
-    private String filepath = "MyFileStorage";
+public class DashbordActivity extends SampleActivityBase implements MyListAdapter.ItemClickListener, DatePickerDialog.OnDateSetListener {
     private static final String VCF_DIRECTORY = "/Loan_Tracker";
     private File vcfFile;
     public static final String TAG = "VCarsSavePhoneActivity";
@@ -97,15 +104,15 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
     public FloatingActionButton fab;
     TextView tv1;
     TextView tv2;
+    ArrayList<Object> listdata = new ArrayList<Object>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashbord);
 
         isStoragePermissionGranted();
-
-//        TextView descTxtView= (TextView) findViewById(R.id.descTxtView);
-//        descTxtView.setMovementMethod(new ScrollingMovementMethod());
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
@@ -237,6 +244,8 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
             tv2.setTextColor(getResources().getColor(R.color.black));
             btImportFile.setVisibility(View.GONE);
             flListData.setVisibility(View.VISIBLE);
+            fab.show();
+
         });
 
         tv2.setOnClickListener(view -> {
@@ -246,6 +255,9 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
             tv1.setTextColor(getResources().getColor(R.color.black));
             btImportFile.setVisibility(View.VISIBLE);
             flListData.setVisibility(View.GONE);
+
+                fab.hide();
+
         });
 
 
@@ -291,7 +303,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
                 }
                 File vcfFile = new File(vdfdirectory, "android_" + Calendar.getInstance().getTimeInMillis() + ".txt");
                 FileWriter fw = null;
-                myExternalFile = new File(getExternalFilesDir(filepath), filename);
+                myExternalFile = new File(getExternalFilesDir("MyFileStorage"), "SampleFile.txt");
                 try {
                     FileOutputStream fos = new FileOutputStream(myExternalFile);
                     for (Contact cn : contacts) {
@@ -323,7 +335,6 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 
         });
     }
-
 
     @Override
     public void onBackPressed() {
@@ -496,12 +507,12 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
                         tv2.setBackgroundResource(R.color.white);
                         btImportFile.setVisibility(View.GONE);
                         flListData.setVisibility(View.VISIBLE);
+            showAlert("Data Imported successfully");
+            Toast.makeText(this, "Data Imported successfully", Toast.LENGTH_SHORT).show();
                         etSearch.setText("");
                         finish();
                         Intent intent = new Intent(DashbordActivity.this, DashbordActivity.class);
                         startActivity(intent);
-                        showAlert("Data Imported successfully");
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -539,7 +550,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
     }
 
     public void setTodayTotal(ArrayList<Contact> toDayList) {
-        ArrayList<Object> listdata = new ArrayList<Object>();
+
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         if(sp.getString("key", null)!=null){
             String jsonText2 = "{Contact:["+sp.getString("key", null)+"]}";
@@ -613,19 +624,27 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
                     = dialogView
                     .findViewById(
                             R.id.buttonSms);
-            tvAmount.setText(selectedItem.getName());
+            tvAmount.setText(selectedItem.getName()+"("+selectedItem.getSubhasad_code_no()+")");
             if(selectedItem.getComment().equals("000000")){
-                etComment.setText("0");
+                etComment.setText("");
             }else {
                 etComment.setText("" + selectedItem.getComment());
             }
             builder.setView(dialogView);
             AlertDialog alertDialog = builder.create();
             btn.setOnClickListener(view1 -> {
-                updateAmount(selectedItem, etComment.getText().toString().trim(), "save");
-                alertDialog.hide();
+                if(etComment.getText().toString().trim().isEmpty() || Integer.parseInt(etComment.getText().toString().trim()) == 0){
+                    Toast.makeText(this, "Please Fill The Amount", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                    updateAmount(selectedItem, etComment.getText().toString().trim(), "save");
+                    alertDialog.hide();
             });
             buttonSms.setOnClickListener(view1 -> {
+                    if(etComment.getText().toString().trim().isEmpty() || Integer.parseInt(etComment.getText().toString().trim()) == 0){
+                    Toast.makeText(this, "Please Fill The Amount", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 updateAmount(selectedItem, etComment.getText().toString().trim(), "sms");
                 alertDialog.hide();
             });
@@ -670,184 +689,10 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
             }
             vcfFile = new File(vdfdirectory, "pcrx.dat");
             storeDataInFile(vcfFile,"email");
-//            fw = new FileWriter(vcfFile);
-//            DatabaseHandler db = new DatabaseHandler(this);
-//            List<Contact> contacts = db.getAllContacts();
-//            try {
-//                ArrayList<Contact> toDayList = new ArrayList<Contact>();
-//                for (int i = 0; i < contacts.size(); i++) {
-//                    Contact cn = contacts.get(i);
-//                    myListData2[i] = new Contact(cn.getID(),
-//                            cn.getSubhasad_code_no(),
-//                            cn.getName(), cn.getAddress(),
-//                            cn.getAmount(), cn.getComment(),
-//                            cn.getTotalCollectrdAmount(), cn.getLastpdateDate());
-//                    if (cn.getLastpdateDate().equals("-")) {
-//                    } else {
-//                        toDayList.add(cn);
-//                    }
-//                }
-//                int todayCollectedCount = toDayList.size();
-//                int todayCollectedAmount = 0;
-//                for (Contact i : toDayList) {
-//                    todayCollectedAmount = todayCollectedAmount + i.getTotalCollectrdAmount();
-//                }
-//
-//                int countRemainig1 = 6 - String.valueOf(todayCollectedCount).length();
-//                String addZero1 = "";
-//                for (int i = 0; i < countRemainig1; i++) {
-//                    addZero1 = addZero1.concat("0");
-//                }
-//                int countRemainig2 = 6 - String.valueOf(todayCollectedAmount).length();
-//                String addZero2 = "";
-//                for (int i = 0; i < countRemainig2; i++) {
-//                    addZero2 = addZero2.concat("0");
-//                }
-//
-//                int countRemainig112 = 12 - String.valueOf(todayCollectedAmount).length();
-//                String addZero112 = "";
-//                for (int i = 0; i < countRemainig112; i++) {
-//                    addZero112 = addZero112.concat(" ");
-//                }
-//
-//                String cDate = getCurrentDate().replace('/', '.');
-//                fw.write("  1000" +
-//                        "," + addZero1 + todayCollectedCount +
-//                        "," + addZero2 + (int) todayCollectedAmount + addZero112 +
-//                        ",001001" +
-//                        "," + cDate +
-//                        "," + "12341234\n");
-//                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-//                String jsonText2 = "{Contact:[" + sp.getString("key", null) + "]}";
-//                //Converting jsonData string into JSON object
-//                JSONObject jsnobject = null;
-//                try {
-//                    jsnobject = new JSONObject(jsonText2);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                ArrayList<Object> listdata = new ArrayList<Object>();
-//                try {
-//                    JSONArray jsonArray = jsnobject.getJSONArray("Contact");
-//                    if (jsonArray != null) {
-//                        for (int i = 0; i < jsonArray.length(); i++) {
-//                            listdata.add(jsonArray.get(i));
-//                        }
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                ArrayList<Contact> updatedList = new ArrayList<>(listdata.size());
-//                Gson gson = new Gson();
-//                for (int i = 0; i < listdata.size(); i++) {
-//                    JSONObject obj = (JSONObject) listdata.get(i);
-//                    Contact user = gson.fromJson(String.valueOf(obj), Contact.class);
-//                    updatedList.add(user);
-//                }
-//
-//                for (Contact cn : contacts) {
-//                    for (int i = 0; i < updatedList.size(); i++) {
-//                        if (updatedList.get(i).getID() == cn.getID() && updatedList.get(i).getLastpdateDate().equals(cn.getLastpdateDate())) {
-//                            cn = updatedList.get(i);
-//                            updatedList.remove(i);
-//                        }
-//                    }
-//
-//                    int count = cn.getComment().length();
-//                    int countRemainig = 6 - count;
-//                    String addZero = "";
-//                    for (int i = 0; i < countRemainig; i++) {
-//                        addZero = addZero.concat("0");
-//                    }
-//
-//                    int count11 = (int) (Math.log10(cn.getSubhasad_code_no()) + 1);
-//                    int countRemainig11 = 6 - count11;
-//                    String addZero11 = "";
-//                    for (int i = 0; i < countRemainig11; i++) {
-//                        addZero11 = addZero11.concat(" ");
-//                    }
-//
-//                    int count22 = cn.getName().length();
-//                    int countRemainig22 = 16 - count22;
-//                    String addZero22 = "";
-//                    for (int i = 0; i < countRemainig22; i++) {
-//                        addZero22 = addZero22.concat(" ");
-//                    }
-//
-//                    int count227 = String.valueOf(cn.getAmount()).length();
-//                    int countRemainig227 = 6 - count227;
-//                    String addZero227 = "";
-//                    for (int i = 0; i < countRemainig227; i++) {
-//                        addZero227 = addZero227.concat("0");
-//                    }
-//
-//                    String log = addZero11 + cn.getSubhasad_code_no() + "," + addZero + cn.getComment() + "," + cn.getName() + addZero22 + "," + addZero227 + (int) cn.getAmount() + "," + cn.getLastpdateDate() + "," + addZero + cn.getComment() + "  " + "\n";
-//
-//                    if (cn.getComment().equals("000000")) {  //m_sDate
-//
-//                    } else {
-//                        fw.write(log);
-//                    }
-//                }
-//
-//                for (Contact cn : updatedList) {
-//                    int count = cn.getComment().length();
-//                    int countRemainig = 6 - count;
-//                    String addZero = "";
-//                    for (int i = 0; i < countRemainig; i++) {
-//                        addZero = addZero.concat("0");
-//                    }
-//
-//                    int count11 = (int) (Math.log10(cn.getSubhasad_code_no()) + 1);
-//                    int countRemainig11 = 6 - count11;
-//                    String addZero11 = "";
-//                    for (int i = 0; i < countRemainig11; i++) {
-//                        addZero11 = addZero11.concat(" ");
-//                    }
-//
-//                    int count22 = cn.getName().length();
-//                    int countRemainig22 = 16 - count22;
-//                    String addZero22 = "";
-//                    for (int i = 0; i < countRemainig22; i++) {
-//                        addZero22 = addZero22.concat(" ");
-//                    }
-//
-//                    int count227 = String.valueOf(cn.getAmount()).length();
-//                    int countRemainig227 = 6 - count227;
-//                    String addZero227 = "";
-//                    for (int i = 0; i < countRemainig227; i++) {
-//                        addZero227 = addZero227.concat("0");
-//                    }
-//
-//                    String log = addZero11 + cn.getSubhasad_code_no() + "," + addZero + cn.getComment() + "," + cn.getName() + addZero22 + "," + addZero227 + (int) cn.getAmount() + "," + cn.getLastpdateDate() + "," + addZero + cn.getComment() + "  " + "\n";
-//
-//                    if (cn.getComment().equals("000000")) {  //m_sDate
-//                    } else {
-//                        fw.write(log);
-//                    }
-//                }
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            fw.close();
         } catch (IOException e) {
             e.printStackTrace();
             Log.d(" IOException : ", "");
         }
-
-//        File fileToShare = vcfFile;
-//        if (fileToShare == null || !fileToShare.exists()) {
-//            Toast.makeText(this, "text_generated_file_error", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-//        Uri apkURI = FileProvider.getUriForFile(getApplicationContext(),getApplicationContext().getPackageName() + ".provider", fileToShare);
-//        intentShareFile.setDataAndType(apkURI, URLConnection.guessContentTypeFromName(fileToShare.getName()));
-//        intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//        intentShareFile.putExtra(Intent.EXTRA_STREAM,apkURI);
-//        startActivity(Intent.createChooser(intentShareFile, "Share File"));
     }
 
     public boolean isStoragePermissionGranted() {
@@ -877,163 +722,6 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
             }
             vcfFile = new File("/storage/emulated/0/Loan_Tracker", "pcrx.dat");
             storeDataInFile(vcfFile,"save");
-//            FileWriter fw = null;
-//            fw = new FileWriter(vcfFile);
-//            DatabaseHandler db = new DatabaseHandler(this);
-//            List<Contact> contacts = db.getAllContacts();
-//            try {
-//                ArrayList<Contact> toDayList = new ArrayList<Contact>();
-//                for (int i = 0; i < contacts.size(); i++) {
-//                    Contact cn = contacts.get(i);
-//                    myListData2[i] = new Contact(cn.getID(),cn.getSubhasad_code_no(),cn.getName(), cn.getAddress(),cn.getAmount(), cn.getComment(),cn.getTotalCollectrdAmount(), cn.getLastpdateDate());
-//                    if (cn.getLastpdateDate().equals("-")) {
-//                    } else {
-//                        toDayList.add(cn);
-//                    }
-//                }
-//                int todayCollectedCount = toDayList.size();
-//                int todayCollectedAmount = 0;
-//                for (Contact i : toDayList) {
-//                    todayCollectedAmount = todayCollectedAmount + i.getTotalCollectrdAmount();
-//                }
-//
-//                int countRemainig1 = 6 - String.valueOf(todayCollectedCount).length();
-//                String addZero1 = "";
-//                for (int i = 0; i < countRemainig1; i++) {
-//                    addZero1 = addZero1.concat("0");
-//                }
-//                int countRemainig2 = 6 - String.valueOf(todayCollectedAmount).length();
-//                String addZero2 = "";
-//                for (int i = 0; i < countRemainig2; i++) {
-//                    addZero2 = addZero2.concat("0");
-//                }
-//
-//                int countRemainig112 = 12 - String.valueOf(todayCollectedAmount).length();
-//                String addZero112 = "";
-//                for (int i = 0; i < countRemainig112; i++) {
-//                    addZero112 = addZero112.concat(" ");
-//                }
-//
-//                String cDate = getCurrentDate().replace('/', '.');
-//                fw.write("  1000" +
-//                        "," + addZero1 + todayCollectedCount +
-//                        "," + addZero2 + (int) todayCollectedAmount + addZero112 +
-//                        ",001001" +
-//                        "," + cDate +
-//                        "," + "12341234\n");
-//                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-//                String jsonText2 = "{Contact:[" + sp.getString("key", null) + "]}";
-//                //Converting jsonData string into JSON object
-//                JSONObject jsnobject = null;
-//                try {
-//                    jsnobject = new JSONObject(jsonText2);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                ArrayList<Object> listdata = new ArrayList<Object>();
-//                try {
-//                    JSONArray jsonArray = jsnobject.getJSONArray("Contact");
-//                    if (jsonArray != null) {
-//                        for (int i = 0; i < jsonArray.length(); i++) {
-//                            listdata.add(jsonArray.get(i));
-//                        }
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                ArrayList<Contact> updatedList = new ArrayList<>(listdata.size());
-//                Gson gson = new Gson();
-//                for (int i = 0; i < listdata.size(); i++) {
-//                    JSONObject obj = (JSONObject) listdata.get(i);
-//                    Contact user = gson.fromJson(String.valueOf(obj), Contact.class);
-//                    updatedList.add(user);
-//                }
-//
-//                for (Contact cn : contacts) {
-//                    for (int i = 0; i < updatedList.size(); i++) {
-//                        if (updatedList.get(i).getID() == cn.getID() && updatedList.get(i).getLastpdateDate().equals(cn.getLastpdateDate())) {
-//                            cn = updatedList.get(i);
-//                            updatedList.remove(i);
-//                        }
-//                    }
-//
-//                    int count = cn.getComment().length();
-//                    int countRemainig = 6 - count;
-//                    String addZero = "";
-//                    for (int i = 0; i < countRemainig; i++) {
-//                        addZero = addZero.concat("0");
-//                    }
-//
-//                    int count11 = (int) (Math.log10(cn.getSubhasad_code_no()) + 1);
-//                    int countRemainig11 = 6 - count11;
-//                    String addZero11 = "";
-//                    for (int i = 0; i < countRemainig11; i++) {
-//                        addZero11 = addZero11.concat(" ");
-//                    }
-//
-//                    int count22 = cn.getName().length();
-//                    int countRemainig22 = 16 - count22;
-//                    String addZero22 = "";
-//                    for (int i = 0; i < countRemainig22; i++) {
-//                        addZero22 = addZero22.concat(" ");
-//                    }
-//
-//                    int count227 = String.valueOf(cn.getAmount()).length();
-//                    int countRemainig227 = 6 - count227;
-//                    String addZero227 = "";
-//                    for (int i = 0; i < countRemainig227; i++) {
-//                        addZero227 = addZero227.concat("0");
-//                    }
-//
-//                    String log = addZero11 + cn.getSubhasad_code_no() + "," + addZero + cn.getComment() + "," + cn.getName() + addZero22 + "," + addZero227 + (int) cn.getAmount() + "," + cn.getLastpdateDate() + "," + addZero + cn.getComment() + "  " + "\n";
-//
-//                    if (cn.getComment().equals("000000")) {  //m_sDate
-//
-//                    } else {
-//                        fw.write(log);
-//                    }
-//                }
-//
-//                for (Contact cn : updatedList) {
-//                    int count = cn.getComment().length();
-//                    int countRemainig = 6 - count;
-//                    String addZero = "";
-//                    for (int i = 0; i < countRemainig; i++) {
-//                        addZero = addZero.concat("0");
-//                    }
-//
-//                    int count11 = (int) (Math.log10(cn.getSubhasad_code_no()) + 1);
-//                    int countRemainig11 = 6 - count11;
-//                    String addZero11 = "";
-//                    for (int i = 0; i < countRemainig11; i++) {
-//                        addZero11 = addZero11.concat(" ");
-//                    }
-//
-//                    int count22 = cn.getName().length();
-//                    int countRemainig22 = 16 - count22;
-//                    String addZero22 = "";
-//                    for (int i = 0; i < countRemainig22; i++) {
-//                        addZero22 = addZero22.concat(" ");
-//                    }
-//
-//                    int count227 = String.valueOf(cn.getAmount()).length();
-//                    int countRemainig227 = 6 - count227;
-//                    String addZero227 = "";
-//                    for (int i = 0; i < countRemainig227; i++) {
-//                        addZero227 = addZero227.concat("0");
-//                    }
-//
-//                    String log = addZero11 + cn.getSubhasad_code_no() + "," + addZero + cn.getComment() + "," + cn.getName() + addZero22 + "," + addZero227 + (int) cn.getAmount() + "," + cn.getLastpdateDate() + "," + addZero + cn.getComment() + "  " + "\n";
-//
-//                    if (cn.getComment().equals("000000")) {  //m_sDate
-//                    } else {
-//                        fw.write(log);
-//                    }
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            fw.close();
             showAlert("File Saved in Loan_Tracker Folder!");
         } catch (IOException e) {
             e.printStackTrace();
@@ -1062,7 +750,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
             }
 
         }
-        int todayCollectedCount = toDayList.size();
+        int todayCollectedCount = listdata.size();
         int todayCollectedAmount = 0;
         for (Contact i : toDayList) {
             todayCollectedAmount = todayCollectedAmount + i.getTotalCollectrdAmount();

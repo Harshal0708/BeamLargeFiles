@@ -30,7 +30,8 @@ public class HistoryListItemAdapter extends RecyclerView.Adapter<HistoryListItem
 
     public ArrayList<HistoryListItem> listdata;
     public Context c;
-
+    private static ItemClickListener sClickListener;
+    private static ItemClickListener2 sClickListener2;
     public HistoryListItemAdapter(Context context, ArrayList<HistoryListItem> listdata) {
         this.listdata = listdata;
         this.c= context;
@@ -68,10 +69,6 @@ public class HistoryListItemAdapter extends RecyclerView.Adapter<HistoryListItem
         holder.tvNames.setText(""+names);
         holder.tvAmounts.setText(amounts);
         holder.tvTotalAmount.setText(""+totalAmount);
-
-        holder.tvPDF.setOnClickListener(view -> {
-            Toast.makeText(c, "Downloading PDF..!!!", Toast.LENGTH_SHORT).show();
-        });
     }
 
     @Override
@@ -79,8 +76,9 @@ public class HistoryListItemAdapter extends RecyclerView.Adapter<HistoryListItem
         return listdata.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView tvDate,tvNames,tvAmounts,tvTotalAmount,tvPDF;
+        public LinearLayout relativeLayout;
         public ViewHolder(View itemView) {
             super(itemView);
             this.tvDate = (TextView) itemView.findViewById(R.id.tvDate);
@@ -88,7 +86,36 @@ public class HistoryListItemAdapter extends RecyclerView.Adapter<HistoryListItem
             this.tvAmounts = (TextView) itemView.findViewById(R.id.tvAmounts);
             this.tvTotalAmount = (TextView) itemView.findViewById(R.id.tvTotalAmount);
             this.tvPDF = (TextView) itemView.findViewById(R.id.tvPDF);
+            relativeLayout = (LinearLayout) itemView.findViewById(R.id.relativeLayout);
+            relativeLayout.setOnClickListener(this);
+            tvPDF.setOnClickListener(view -> {
+                sClickListener2.onItemClickListener2(getAdapterPosition(), view, listdata.get(getAdapterPosition()));
+            });
         }
+
+        @Override
+        public void onClick(View view) {
+            sClickListener.onItemClickListener(getAdapterPosition(), view, listdata.get(getAdapterPosition()));
+            Log.d("Clickced :: ","CLicked "+ listdata.get(getAdapterPosition()));
+        }
+    }
+
+    public void setOnItemClickListener(ItemClickListener clickListener) {
+        sClickListener = clickListener;
+        notifyDataSetChanged();
+    }
+
+    public void setOnItemClickListener2(ItemClickListener2 clickListener2) {
+        sClickListener2 = clickListener2;
+        notifyDataSetChanged();
+    }
+
+    public interface ItemClickListener {
+        void onItemClickListener(int position, View view,HistoryListItem listItem);
+    }
+
+    public interface ItemClickListener2 {
+        void onItemClickListener2(int position, View view,HistoryListItem listItem);
     }
 
 }

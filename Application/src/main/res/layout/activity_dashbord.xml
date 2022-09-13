@@ -53,6 +53,8 @@
 <!--            android:id="@+id/update_date_button"-->
 <!--            android:text="Update Selected Date TextView"/>-->
 
+
+
         <LinearLayout
             android:id="@+id/llTrnsactionListByDate"
         android:layout_width="match_parent"
@@ -121,15 +123,6 @@
 
     </LinearLayout>
 </android.support.v7.widget.CardView>
-<!--    <TextView-->
-<!--        android:id="@+id/descTxtView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:maxLines="3"-->
-<!--        android:scrollbars="vertical"-->
-<!--        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s. asdfdsokfsdfkasdoifjosjfodjsofjsdjfsjofjsdojafosdjafjsdifjsdjfosjdofjsdofjosjfojsdofjosdfsdjfojsdofsdfsfdsojdfsjado"-->
-<!--        android:textColor="#232e3b"-->
-<!--        android:typeface="sans" />-->
 <android.support.v7.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -204,12 +197,7 @@
                 android:singleLine="true"
                 android:padding="10dp"
                 android:layout_margin="10dp"/>
-<!--                <Button-->
-<!--                    android:id="@+id/btNext"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Next Scren"-->
-<!--                    />-->
+
         <android.support.v7.widget.RecyclerView
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"

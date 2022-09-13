@@ -9,6 +9,22 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:padding="60dp">
+    <ImageView
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:gravity="center_horizontal"
+        android:src="@mipmap/ic_launcher"
+        android:layout_margin="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LATE SITARAM .G. MALI SEVING CREDIT SO. LTD"
+        android:textSize="26dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        android:paddingBottom="40dp"/>
 
     <EditText
         android:id="@+id/etUN"

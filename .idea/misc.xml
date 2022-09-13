@@ -6,6 +6,7 @@
         <entry key="../../../Library/Android/sdk/platforms/android-28/data/res/layout/auto_complete_list.xml" value="0.1171875" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/drawable-xhdpi/border.xml" value="0.147" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/drawable-xhdpi/border_select.xml" value="0.147" />
+        <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/drawable/button_layout.xml" value="0.152" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout-sw600dp/history_list_item.xml" value="0.1" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/activity_createv_cars.xml" value="0.12526041666666668" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/activity_dashbord.xml" value="0.1" />
@@ -20,7 +21,8 @@
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/activity_view_info.xml" value="0.10602310231023103" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/activity_view_information.xml" value="0.1" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/activity_view_list.xml" value="0.10602310231023103" />
-        <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/activity_view_transaction_history.xml" value="0.1" />
+        <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/activity_view_transaction_details.xml" value="0.1171875" />
+        <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/activity_view_transaction_history.xml" value="0.136" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/button_layout.xml" value="0.1" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/customview.xml" value="0.1125" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/exportpopup.xml" value="0.128" />
@@ -28,6 +30,10 @@
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/fragment_home2.xml" value="0.12526041666666668" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/history_list_item.xml" value="0.264" />
         <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/main/res/layout/list_item.xml" value="0.264" />
+        <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/template/res/drawable/ic_baseline_arrow_back_24.xml" value="0.152" />
+        <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/template/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.116" />
+        <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/template/res/mipmap-anydpi-v26/ic_launcher1.xml" value="0.185" />
+        <entry key="..\:/Users/admin/Downloads/Compressed/BeamLargeFiles/Application/src/template/res/mipmap-anydpi-v26/ic_launcher1_round.xml" value="0.116" />
         <entry key="Application/src/main/res/drawable-xhdpi/border.xml" value="0.1155" />
         <entry key="Application/src/main/res/layout-sw600dp-land/activity_main.xml" value="0.176171875" />
         <entry key="Application/src/main/res/layout-sw600dp/activity_main.xml" value="0.174609375" />

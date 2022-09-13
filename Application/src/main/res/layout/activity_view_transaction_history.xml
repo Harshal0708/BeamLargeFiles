@@ -18,9 +18,7 @@
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:gravity="center|start"
-            android:padding="10dp"
-            >
-
+            android:padding="10dp">
             <ImageView
                 android:id="@+id/imBack"
                 android:layout_width="24dp"
@@ -44,7 +42,6 @@
 <!--    <FrameLayout-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="match_parent">-->
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvList"
         android:layout_width="match_parent"

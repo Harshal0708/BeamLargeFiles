@@ -50,4 +50,13 @@ public class HistoryListItem implements Comparable<HistoryListItem> {
         else
             return -1;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "date='" + date + '\'' +
+                ", date2Char=" + date2Char +
+                ", items=" + items +
+                '}';
+    }
 }

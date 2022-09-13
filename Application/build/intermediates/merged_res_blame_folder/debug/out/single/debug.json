@@ -1,9 +1,5 @@
 [
     {
-        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\drawable-xhdpi\\ic_launcher.png"
-    },
-    {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_foreground.png.flat",
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\template\\res\\mipmap-xxhdpi\\ic_launcher_foreground.png"
     },
@@ -14,10 +10,6 @@
     {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\drawable_button_layout.xml.flat",
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\drawable\\button_layout.xml"
-    },
-    {
-        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher.png.flat",
-        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\drawable\\ic_launcher.png"
     },
     {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\layout_history_list_item.xml.flat",
@@ -38,10 +30,6 @@
     {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher1_round.xml.flat",
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\template\\res\\mipmap-anydpi-v26\\ic_launcher1_round.xml"
-    },
-    {
-        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
     },
     {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_baseline_arrow_back_24.png.flat",
@@ -164,6 +152,10 @@
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\customview.xml"
     },
     {
+        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\drawable_logo.png.flat",
+        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\drawable\\logo.png"
+    },
+    {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\template\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
@@ -186,6 +178,10 @@
     {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\layout_activity_login.xml.flat",
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\layout_activity_view_transaction_details.xml.flat",
+        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\activity_view_transaction_details.xml"
     },
     {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_border_select.xml.flat",
@@ -220,10 +216,6 @@
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\template\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\drawable-xxhdpi\\ic_launcher.png"
-    },
-    {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher1_round.png.flat",
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\template\\res\\mipmap-xhdpi\\ic_launcher1_round.png"
     },
@@ -246,10 +238,6 @@
     {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\drawable_tile.9.png.flat",
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\drawable\\tile.9.png"
-    },
-    {
-        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
     },
     {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\res\\merged\\debug\\drawable_checked.png.flat",

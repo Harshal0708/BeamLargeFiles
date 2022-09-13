@@ -16,7 +16,7 @@
 -->
 
 <resources>
-    <string name="app_name">Loan Tracker</string>
+    <string name="app_name">Daily Collection</string>
     <string name="intro_message">
         <![CDATA[
         

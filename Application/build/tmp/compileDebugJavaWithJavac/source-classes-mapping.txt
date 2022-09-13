@@ -8,6 +8,8 @@ com/example/android/beamlargefiles/adapter/MyListAdapter.java
  com.example.android.beamlargefiles.adapter.MyListAdapter
  com.example.android.beamlargefiles.adapter.MyListAdapter$ItemClickListener
  com.example.android.beamlargefiles.adapter.MyListAdapter$ViewHolder
+com/example/android/beamlargefiles/activity/ViewTransactionDetailsActivity.java
+ com.example.android.beamlargefiles.activity.ViewTransactionDetailsActivity
 com/example/android/beamlargefiles/models/HistoryListItem.java
  com.example.android.beamlargefiles.models.HistoryListItem
 com/example/android/common/logger/LogWrapper.java
@@ -33,12 +35,16 @@ com/example/android/beamlargefiles/databinding/ActivityViewTransactionHistoryBin
  com.example.android.beamlargefiles.databinding.ActivityViewTransactionHistoryBinding
 com/example/android/beamlargefiles/adapter/HistoryListItemAdapter.java
  com.example.android.beamlargefiles.adapter.HistoryListItemAdapter
+ com.example.android.beamlargefiles.adapter.HistoryListItemAdapter$ItemClickListener
+ com.example.android.beamlargefiles.adapter.HistoryListItemAdapter$ItemClickListener2
  com.example.android.beamlargefiles.adapter.HistoryListItemAdapter$ViewHolder
 com/example/android/common/logger/LogFragment.java
  com.example.android.common.logger.LogFragment
  com.example.android.common.logger.LogFragment$1
 com/example/android/beamlargefiles/databinding/ActivityDashbordBinding.java
  com.example.android.beamlargefiles.databinding.ActivityDashbordBinding
+com/example/android/beamlargefiles/databinding/ActivityViewTransactionDetailsBinding.java
+ com.example.android.beamlargefiles.databinding.ActivityViewTransactionDetailsBinding
 com/example/android/beamlargefiles/activity/ViewTransactionHistoryActivity.java
  com.example.android.beamlargefiles.activity.ViewTransactionHistoryActivity
 com/example/android/beamlargefiles/databinding/ActivityLoginBinding.java
