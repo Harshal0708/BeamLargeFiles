@@ -12,59 +12,35 @@
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\customview.xml"
     },
     {
-        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main2.xml",
-        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\activity_main2.xml"
-    },
-    {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_view_transaction_details.xml",
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\activity_view_transaction_details.xml"
-    },
-    {
-        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_file_import.xml",
-        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\activity_file_import.xml"
     },
     {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_dashbord.xml",
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\activity_dashbord.xml"
     },
     {
-        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_home.xml",
-        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\activity_home.xml"
-    },
-    {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\history_list_item.xml",
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\history_list_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\custom_popup_2.xml",
+        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\custom_popup_2.xml"
+    },
+    {
+        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_splash.xml",
+        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\activity_splash.xml"
     },
     {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\list_item.xml",
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\list_item.xml"
     },
     {
-        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_home2.xml",
-        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\fragment_home2.xml"
-    },
-    {
-        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main3.xml",
-        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\activity_main3.xml"
-    },
-    {
-        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_home.xml",
-        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\fragment_home.xml"
-    },
-    {
-        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_view_information.xml",
-        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\activity_view_information.xml"
-    },
-    {
-        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_home2.xml",
-        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\activity_home2.xml"
-    },
-    {
-        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main10.xml",
-        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\activity_main10.xml"
-    },
-    {
         "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\exportpopup.xml",
         "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\exportpopup.xml"
+    },
+    {
+        "merged": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\custom_popup.xml",
+        "source": "C:\\Users\\admin\\Downloads\\Compressed\\BeamLargeFiles\\Application\\src\\main\\res\\layout\\custom_popup.xml"
     }
 ]

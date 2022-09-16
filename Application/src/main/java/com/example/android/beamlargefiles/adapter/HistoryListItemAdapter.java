@@ -9,22 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.beamlargefiles.R;
-import com.example.android.beamlargefiles.activity.ViewTransactionHistoryActivity;
 import com.example.android.beamlargefiles.models.Contact;
 import com.example.android.beamlargefiles.models.HistoryListItem;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 public class HistoryListItemAdapter extends RecyclerView.Adapter<HistoryListItemAdapter.ViewHolder>{
 
@@ -77,7 +67,8 @@ public class HistoryListItemAdapter extends RecyclerView.Adapter<HistoryListItem
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public TextView tvDate,tvNames,tvAmounts,tvTotalAmount,tvPDF;
+        public TextView tvDate,tvNames,tvAmounts,tvTotalAmount;
+        ImageView tvPDF;
         public LinearLayout relativeLayout;
         public ViewHolder(View itemView) {
             super(itemView);
@@ -85,7 +76,7 @@ public class HistoryListItemAdapter extends RecyclerView.Adapter<HistoryListItem
             this.tvNames = (TextView) itemView.findViewById(R.id.tvNames);
             this.tvAmounts = (TextView) itemView.findViewById(R.id.tvAmounts);
             this.tvTotalAmount = (TextView) itemView.findViewById(R.id.tvTotalAmount);
-            this.tvPDF = (TextView) itemView.findViewById(R.id.tvPDF);
+            this.tvPDF = (ImageView) itemView.findViewById(R.id.tvPDF);
             relativeLayout = (LinearLayout) itemView.findViewById(R.id.relativeLayout);
             relativeLayout.setOnClickListener(this);
             tvPDF.setOnClickListener(view -> {

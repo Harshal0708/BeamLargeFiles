@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.viewbinding.ViewBinding;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.example.android.beamlargefiles.R;
 import java.lang.NullPointerException;
@@ -28,12 +29,16 @@ public final class ActivityLoginBinding implements ViewBinding {
   @NonNull
   public final EditText etUN;
 
+  @NonNull
+  public final ImageView showHide;
+
   private ActivityLoginBinding(@NonNull LinearLayout rootView, @NonNull Button btLogin,
-      @NonNull EditText etPASS, @NonNull EditText etUN) {
+      @NonNull EditText etPASS, @NonNull EditText etUN, @NonNull ImageView showHide) {
     this.rootView = rootView;
     this.btLogin = btLogin;
     this.etPASS = etPASS;
     this.etUN = etUN;
+    this.showHide = showHide;
   }
 
   @Override
@@ -81,7 +86,13 @@ public final class ActivityLoginBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityLoginBinding((LinearLayout) rootView, btLogin, etPASS, etUN);
+      id = R.id.showHide;
+      ImageView showHide = rootView.findViewById(id);
+      if (showHide == null) {
+        break missingId;
+      }
+
+      return new ActivityLoginBinding((LinearLayout) rootView, btLogin, etPASS, etUN, showHide);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

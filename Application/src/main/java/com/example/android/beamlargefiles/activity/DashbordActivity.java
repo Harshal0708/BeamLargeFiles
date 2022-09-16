@@ -1,38 +1,27 @@
 package com.example.android.beamlargefiles.activity;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.DownloadManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Typeface;
-import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.OpenableColumns;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,23 +55,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URLConnection;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class DashbordActivity extends SampleActivityBase implements MyListAdapter.ItemClickListener, DatePickerDialog.OnDateSetListener {
-    private static final String VCF_DIRECTORY = "/Loan_Tracker";
+    private static final String VCF_DIRECTORY = "/Daily_collection";
     private File vcfFile;
     public static final String TAG = "VCarsSavePhoneActivity";
     File myExternalFile;
@@ -104,8 +86,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
     public FloatingActionButton fab;
     TextView tv1;
     TextView tv2;
-    ArrayList<Object> listdata = new ArrayList<Object>();
-
+    ArrayList<Object> listdata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -265,17 +246,27 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
         btImportFile1 = findViewById(R.id.btImportFile1);
 
         btImportFile1.setOnClickListener(view -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(DashbordActivity.this);
-            builder.setMessage("Do you want to add data?")
-                    .setTitle("Import Data")
-                    .setCancelable(false)
-                    .setPositiveButton("YES", (dialog, which) -> {
-                        openExplore();
-                        dialog.cancel();
-                    })
-                    .setNegativeButton("NO", (dialog, which) -> dialog.cancel());
-            AlertDialog alert = builder.create();
-            alert.show();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            ViewGroup viewGroup = findViewById(android.R.id.content);
+            View dialogView = LayoutInflater.from(DashbordActivity.this).inflate(R.layout.custom_popup_2, viewGroup, false);
+            builder.setView(dialogView);
+            alertDialog = builder.create();
+            alertDialog.show();
+
+            Button btYes = dialogView.findViewById(R.id.btYes);
+            Button btNo = dialogView.findViewById(R.id.btNo);
+            TextView tvMsg= dialogView.findViewById(R.id.tvMsg);
+            tvMsg.setText("Do you want to add data?");
+            btYes.setOnClickListener(v -> {
+                openExplore();
+                alertDialog.hide();
+            });
+            btNo.setOnClickListener(v -> {
+                alertDialog.hide();
+            });
+
+
         });
 
         flListData = findViewById(R.id.flListData);
@@ -327,7 +318,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
                 in.close();
                 fw.close();
                 tvData.setText(myData);
-                showAlert("File Saved in Loan_Tracker Folder!");
+                showAlert("File Saved in Daily_collection Folder!");
             } catch (IOException e) {
                 e.printStackTrace();
                 Log.d(" IOException : ", "");
@@ -339,34 +330,41 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(false);
-        builder.setMessage("Do you want to Exit?");
-        builder.setPositiveButton("Yes", (dialog, which) -> finish());
-        builder.setNegativeButton("No", (dialog, which) -> {
-            dialog.cancel();
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(DashbordActivity.this).inflate(R.layout.custom_popup_2, viewGroup, false);
+        builder.setView(dialogView);
+        alertDialog = builder.create();
+        alertDialog.show();
+
+        Button btYes = dialogView.findViewById(R.id.btYes);
+        Button btNo = dialogView.findViewById(R.id.btNo);
+        TextView tvMsg= dialogView.findViewById(R.id.tvMsg);
+        tvMsg.setText("Do you want to Exit?");
+        btYes.setOnClickListener(v -> {
+            finish();
+            alertDialog.hide();
         });
-        AlertDialog alert = builder.create();
-        alert.show();
+        btNo.setOnClickListener(v -> {
+            alertDialog.hide();
+        });
     }
 
     public void showAlert(String msg) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(msg).setTitle(R.string.app_name);
-        builder.setMessage(msg)
-                .setCancelable(false)
-                .setPositiveButton("OK", (dialog, id) -> {
-                    dialog.cancel();
-                })
-//                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        //  Action for 'NO' Button
-//                        dialog.cancel();
-//                    }
-//                })
-        ;
-        AlertDialog alert = builder.create();
-        alert.setTitle(R.string.app_name);
-        alert.show();
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(DashbordActivity.this).inflate(R.layout.custom_popup, viewGroup, false);
+        builder.setView(dialogView);
+        alertDialog = builder.create();
+        alertDialog.show();
+
+        Button btOk = dialogView.findViewById(R.id.btOk);
+        TextView tvMsg= dialogView.findViewById(R.id.tvMsg);
+        tvMsg.setText(msg);
+        btOk.setOnClickListener(view -> {
+            alertDialog.hide();
+        });
+
     }
 
     @Override
@@ -463,7 +461,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
     public void importFile(Uri uri) {
         String fileName = getFileName(uri);
         try {
-            File myfile = new File(Environment.getExternalStorageDirectory() + "/" + "Loan_Tracker");
+            File myfile = new File(Environment.getExternalStorageDirectory() + "/" + "Daily_collection");
             File file = new File(myfile, fileName);
             String data = getdata(file);
             String[] lines = data.split("[\r\n]+");
@@ -564,13 +562,16 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 
             try {
                 JSONArray jsonArray = jsnobject.getJSONArray("Contact");
+                listdata = new ArrayList<Object>();
                 if (jsonArray != null) {
                     for (int i=0;i<jsonArray.length();i++){
                         listdata.add(jsonArray.get(i));
                     }
                 }
+                tvTotalTransacion.setText("" +listdata.size());
             } catch (JSONException e) {
                 e.printStackTrace();
+//                tvTotalTransacion.setText("0");
             }
         }
 
@@ -578,11 +579,12 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
         for (Contact i : toDayList) {
             todayCollectedAmount = todayCollectedAmount + i.getTotalCollectrdAmount();
         }
-        tvTotalTransacion.setText("" + listdata.size());
+
         tvTotalTransacionAmount.setText("" + todayCollectedAmount);
     }
 
     public void setAdapterData(Contact[] listData) {
+
         adapter = new MyListAdapter(this, listData);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -602,7 +604,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
         String m_sDate2 = selectedItem.getLastpdateDate();
 
         if (m_sDate.equals(m_sDate2)) {
-            showAlert("You will not be able to update this Account amount");
+            showAlert("You will not be able to update this account amount");
         } else if (getCurrentDate().equals(m_sDate)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             ViewGroup viewGroup = findViewById(android.R.id.content);
@@ -633,20 +635,16 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
             builder.setView(dialogView);
             AlertDialog alertDialog = builder.create();
             btn.setOnClickListener(view1 -> {
-                if(etComment.getText().toString().trim().isEmpty() || Integer.parseInt(etComment.getText().toString().trim()) == 0){
-                    Toast.makeText(this, "Please Fill The Amount", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                if(inputAmount(etComment.getText().toString().trim())){
                     updateAmount(selectedItem, etComment.getText().toString().trim(), "save");
                     alertDialog.hide();
+                }
             });
             buttonSms.setOnClickListener(view1 -> {
-                    if(etComment.getText().toString().trim().isEmpty() || Integer.parseInt(etComment.getText().toString().trim()) == 0){
-                    Toast.makeText(this, "Please Fill The Amount", Toast.LENGTH_SHORT).show();
-                    return;
+                if(inputAmount(etComment.getText().toString().trim())){
+                    updateAmount(selectedItem, etComment.getText().toString().trim(), "sms");
+                    alertDialog.hide();
                 }
-                updateAmount(selectedItem, etComment.getText().toString().trim(), "sms");
-                alertDialog.hide();
             });
             alertDialog.show();
         } else {
@@ -654,10 +652,25 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
         }
     }
 
+    boolean inputAmount(String text){
+        if(text.isEmpty() || Integer.parseInt(text.trim()) == 0){
+            Toast.makeText(this, "Please enter valid amount", Toast.LENGTH_SHORT).show();
+            return false;
+        }else {
+            char char1 = text.charAt(0);
+            char c2 = '0';
+            if(Character.compare(char1 , c2) == 0){
+                Toast.makeText(this, "Please enter valid amount", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+        return true;
+    }
+
     void popup() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         ViewGroup viewGroup = findViewById(android.R.id.content);
-        final View dialogView = LayoutInflater.from(DashbordActivity.this).inflate(R.layout.exportpopup, viewGroup, false);
+        View dialogView = LayoutInflater.from(DashbordActivity.this).inflate(R.layout.exportpopup, viewGroup, false);
         builder.setView(dialogView);
         alertDialog = builder.create();
         alertDialog.show();
@@ -673,6 +686,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
         });
         btSave.setOnClickListener(view -> {
             if (isStoragePermissionGranted()) {
+                alertDialog.hide();
                 savevCardData();
             }
             alertDialog.hide();
@@ -720,9 +734,10 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
             if (!vdfdirectory.exists()) {
                 vdfdirectory.mkdirs();
             }
-            vcfFile = new File("/storage/emulated/0/Loan_Tracker", "pcrx.dat");
+            Toast.makeText(this, "File Saved in Daily_collection Folder!", Toast.LENGTH_SHORT).show();
+            showAlert("File Saved in Daily_collection Folder!");
+            vcfFile = new File("/storage/emulated/0/Daily_collection", "pcrx.dat");
             storeDataInFile(vcfFile,"save");
-            showAlert("File Saved in Loan_Tracker Folder!");
         } catch (IOException e) {
             e.printStackTrace();
             Log.d(" IOException : ", "");
@@ -756,6 +771,16 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
             todayCollectedAmount = todayCollectedAmount + i.getTotalCollectrdAmount();
         }
 
+        String addTT = "";
+        String t = String.valueOf(todayCollectedCount);
+        String ss = String.valueOf(todayCollectedAmount);
+        for(int i=0;i<16;i++){
+            if(i<ss.length()){
+                addTT = addTT.concat(String.valueOf(ss.charAt(i)));
+            }else {
+                addTT = addTT.concat(" ");
+            }
+        }
         int countRemainig1 = 6 - String.valueOf(todayCollectedCount).length();
         String addZero1 = "";
         for (int i = 0; i < countRemainig1; i++) {
@@ -767,12 +792,12 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
             addZero2 = addZero2.concat("0");
         }
 
-        int countRemainig112 = 12 - String.valueOf(todayCollectedAmount).length();
+        int countRemainig112 = 11 - String.valueOf(todayCollectedAmount).length();
         String addZero112 = "";
         for (int i = 0; i < countRemainig112; i++) {
             addZero112 = addZero112.concat(" ");
         }
-
+        String tcc = addZero2 + (int) todayCollectedAmount + addZero112;
         String cDate = getCurrentDate().replace('/', '.');
 //            fw.write("  1000" +
 //                    "," + addZero1 + todayCollectedCount +
@@ -783,10 +808,12 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 
         l.add(new HistoryListItem(00,"  1000" +
                 "," + addZero1 + todayCollectedCount +
-                "," + addZero2 + (int) todayCollectedAmount + addZero112 +
+                "," //+ addZero2 + (int) todayCollectedAmount + addZero112
+//                    +tcc+
+                +addTT+
                 ",001001" +
                 "," + cDate +
-                "," + "12341234\n"));
+                ",12341234" +"\n"));
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         String jsonText2 = "{Contact:[" + sp.getString("key", null) + "]}";
         //Converting jsonData string into JSON object
@@ -963,7 +990,8 @@ ArrayList<HistoryListItem> aaa = l;
         mEdit1.apply();
 
         setTodayTotal(toDayList);
-
+        etSearch.setText("");
+        adapter.notifyDataSetChanged();
         if (buttonEvent.equals("sms")) {
             Intent sendIntent = new Intent(Intent.ACTION_VIEW);
             sendIntent.setData(Uri.parse("sms:8460298962"));
@@ -973,7 +1001,7 @@ ArrayList<HistoryListItem> aaa = l;
                     "Name :- "+updatedItem.getName()+"\n" +
                     "AC. no :- "+updatedItem.getSubhasad_code_no()+"\n" +
                     "Current Balance :- "+updatedItem.getAmount()+"\n" +
-                    "Last Collected Amount :- "+updatedItem.getTotalCollectrdAmount()+"\n" +
+                    "Last Collected Amount :- "+amount+"\n" +
                     "Thank You!!";
             sendIntent.putExtra("sms_body", msg);
             startActivity(sendIntent);

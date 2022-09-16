@@ -22,6 +22,8 @@ com/example/android/common/logger/LogNode.java
  com.example.android.common.logger.LogNode
 com/example/android/beamlargefiles/models/Contact.java
  com.example.android.beamlargefiles.models.Contact
+com/example/android/beamlargefiles/activity/SplashActivity.java
+ com.example.android.beamlargefiles.activity.SplashActivity
 com/example/android/common/logger/Log.java
  com.example.android.common.logger.Log
 com/example/android/common/assetprovider/AssetProvider.java
@@ -29,6 +31,8 @@ com/example/android/common/assetprovider/AssetProvider.java
 com/example/android/common/logger/LogView.java
  com.example.android.common.logger.LogView
  com.example.android.common.logger.LogView$1
+com/example/android/beamlargefiles/databinding/CustomPopup2Binding.java
+ com.example.android.beamlargefiles.databinding.CustomPopup2Binding
 com/example/android/beamlargefiles/databinding/CustomviewBinding.java
  com.example.android.beamlargefiles.databinding.CustomviewBinding
 com/example/android/beamlargefiles/databinding/ActivityViewTransactionHistoryBinding.java
@@ -47,8 +51,12 @@ com/example/android/beamlargefiles/databinding/ActivityViewTransactionDetailsBin
  com.example.android.beamlargefiles.databinding.ActivityViewTransactionDetailsBinding
 com/example/android/beamlargefiles/activity/ViewTransactionHistoryActivity.java
  com.example.android.beamlargefiles.activity.ViewTransactionHistoryActivity
+com/example/android/beamlargefiles/databinding/ActivitySplashBinding.java
+ com.example.android.beamlargefiles.databinding.ActivitySplashBinding
 com/example/android/beamlargefiles/databinding/ActivityLoginBinding.java
  com.example.android.beamlargefiles.databinding.ActivityLoginBinding
+com/example/android/beamlargefiles/databinding/CustomPopupBinding.java
+ com.example.android.beamlargefiles.databinding.CustomPopupBinding
 com/example/android/beamlargefiles/activity/DashbordActivity.java
  com.example.android.beamlargefiles.activity.DashbordActivity
  com.example.android.beamlargefiles.activity.DashbordActivity$1

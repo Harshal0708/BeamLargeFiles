@@ -15,26 +15,21 @@ import android.graphics.pdf.PdfDocument;
 import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.beamlargefiles.R;
 import com.example.android.beamlargefiles.adapter.HistoryListItemAdapter;
-import com.example.android.beamlargefiles.adapter.MyListAdapter;
 import com.example.android.beamlargefiles.models.Contact;
 import com.example.android.beamlargefiles.models.HistoryListItem;
-import com.example.android.beamlargefiles.utils.DatabaseHandler;
 import com.example.android.common.activities.SampleActivityBase;
-import com.example.android.common.logger.Log;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -67,48 +62,67 @@ public class ViewTransactionHistoryActivity extends SampleActivityBase implement
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void generatePDF(HistoryListItem listItem) {
-        PdfDocument pdfDocument = new PdfDocument();
-        Paint paint = new Paint();
-        Paint title = new Paint();
-        PdfDocument.PageInfo mypageInfo = new PdfDocument.PageInfo.Builder(pagewidth, pageHeight, 1).create();
-        PdfDocument.Page myPage = pdfDocument.startPage(mypageInfo);
-        Canvas canvas = myPage.getCanvas();
-        canvas.drawBitmap(scaledbmp, 56, 40, paint);
-        title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
-        title.setTextSize(20);
-        title.setColor(ContextCompat.getColor(this, R.color.black));
-//        canvas.drawText(getResources().getString(R.string.app_name), 209, 80, title);
-        canvas.drawText("LATE SITARAM .G. MALI SEVING CREDIT SO. LTD", 200, 70, title);
-        Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        String formattedDate = df.format(c);
-        canvas.drawText("Date : "+listItem.getDate(), 200, 100, title);
-        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-        title.setColor(ContextCompat.getColor(this, R.color.black));
-        title.setTextSize(15);
 
         int xAxiStart =120;
         int xAxiEnd =620;
-
         int yAxiStart =200;
         int yAxiEnd =200;
-
         int totalAmount = 0;
+        PdfDocument pdfDocument = new PdfDocument();
+        Paint paint = new Paint();
+        boolean isNewPage=true;
+        int pageCount = 1;
+        int parPageItem = 40;
 
-        for (int i=0;i<listItem.getItems().size();i++) {
-            Contact items = listItem.getItems().get(i);
-            canvas.drawText((i+1)+".) "+items.getName()+"("+items.getSubhasad_code_no()+")", xAxiStart, yAxiStart, title);
-            canvas.drawText(""+items.getComment(), xAxiEnd, yAxiEnd, title);
-            yAxiStart = yAxiStart+20;
-            yAxiEnd = yAxiEnd+20;
-            totalAmount = totalAmount +Integer.parseInt(items.getComment());
+        ArrayList<ArrayList<Contact>> l = new ArrayList<ArrayList<Contact>>();
+        ArrayList<Contact> aa = null;
+        for(int i=0;i<listItem.getItems().size();i++){
+            if(i%parPageItem==0){
+                aa = new ArrayList<Contact>();
+                l.add(aa);
+            }
+            aa.add(listItem.getItems().get(i));
+        }
+int count=1;
+        for (int i=0;i<l.size();i++){
+            Paint title = new Paint();
+            PdfDocument.PageInfo mypageInfo = new PdfDocument.PageInfo.Builder(pagewidth, pageHeight, i+1).create();
+            PdfDocument.Page myPage = pdfDocument.startPage(mypageInfo);
+            Canvas canvas = myPage.getCanvas();
+            canvas.drawBitmap(scaledbmp, 56, 40, paint);
+            title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+            title.setTextSize(20);
+            title.setColor(ContextCompat.getColor(this, R.color.black));
+            canvas.drawText("LATE SITARAM .G. MALI SEVING CREDIT SO. LTD", 200, 70, title);
+            Date c = Calendar.getInstance().getTime();
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            String formattedDate = df.format(c);
+            canvas.drawText("Date : "+listItem.getDate(), 200, 100, title);
+            title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+            title.setColor(ContextCompat.getColor(this, R.color.black));
+            title.setTextSize(15);
+            for (int j=0;j<l.get(i).size();j++){
+                Contact items = l.get(i).get(j);
+                canvas.drawText(count+".) "+items.getName()+"("+items.getSubhasad_code_no()+")", xAxiStart, yAxiStart, title);
+                canvas.drawText(""+items.getComment(), xAxiEnd, yAxiEnd, title);
+                yAxiStart = yAxiStart+20;
+                yAxiEnd = yAxiEnd+20;
+                totalAmount = totalAmount +Integer.parseInt(items.getComment());
+                count++;
+            }
+            if(i==l.size()-1) {
+                canvas.drawText("_______________________________________________________________________________", xAxiStart, yAxiEnd - 10, title);
+                canvas.drawText("Total ", xAxiStart, yAxiStart + 10, title);
+                canvas.drawText("" + totalAmount, xAxiEnd, yAxiEnd + 10, title);
+
+            }pdfDocument.finishPage(myPage);
+            xAxiStart =120;
+            xAxiEnd =620;
+            yAxiStart =200;
+            yAxiEnd =200;
         }
 
-        canvas.drawText("_______________________________________________________________________________", xAxiStart, yAxiEnd-10, title);
-        canvas.drawText("Total ", xAxiStart, yAxiStart+10, title);
-        canvas.drawText(""+totalAmount, xAxiEnd, yAxiEnd+10, title);
-        pdfDocument.finishPage(myPage);
-        File vdfdirectory = new File(Environment.getExternalStorageDirectory() + "/Loan_Tracker/Download");
+        File vdfdirectory = new File(Environment.getExternalStorageDirectory() + "/Daily_collection/Download");
         if (!vdfdirectory.exists()) {
             vdfdirectory.mkdirs();
         }
@@ -137,6 +151,7 @@ public class ViewTransactionHistoryActivity extends SampleActivityBase implement
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0) {
                 boolean writeStorage = grantResults[0] == PackageManager.PERMISSION_GRANTED;
@@ -209,9 +224,9 @@ public class ViewTransactionHistoryActivity extends SampleActivityBase implement
         }
         Collections.sort(list);
         adapter = new HistoryListItemAdapter(this,list);
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setHasFixedSize(false);
+//        recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
         adapter.setOnItemClickListener2(this);

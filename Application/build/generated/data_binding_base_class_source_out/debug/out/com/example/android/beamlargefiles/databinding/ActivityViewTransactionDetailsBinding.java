@@ -35,17 +35,22 @@ public final class ActivityViewTransactionDetailsBinding implements ViewBinding 
   public final TextView tvNames;
 
   @NonNull
+  public final ImageView tvPDF;
+
+  @NonNull
   public final TextView tvTotalAmount;
 
   private ActivityViewTransactionDetailsBinding(@NonNull LinearLayout rootView,
       @NonNull TextView btPickDate, @NonNull ImageView imBack, @NonNull LinearLayout relativeLayout,
-      @NonNull TextView tvAmounts, @NonNull TextView tvNames, @NonNull TextView tvTotalAmount) {
+      @NonNull TextView tvAmounts, @NonNull TextView tvNames, @NonNull ImageView tvPDF,
+      @NonNull TextView tvTotalAmount) {
     this.rootView = rootView;
     this.btPickDate = btPickDate;
     this.imBack = imBack;
     this.relativeLayout = relativeLayout;
     this.tvAmounts = tvAmounts;
     this.tvNames = tvNames;
+    this.tvPDF = tvPDF;
     this.tvTotalAmount = tvTotalAmount;
   }
 
@@ -106,6 +111,12 @@ public final class ActivityViewTransactionDetailsBinding implements ViewBinding 
         break missingId;
       }
 
+      id = R.id.tvPDF;
+      ImageView tvPDF = rootView.findViewById(id);
+      if (tvPDF == null) {
+        break missingId;
+      }
+
       id = R.id.tvTotalAmount;
       TextView tvTotalAmount = rootView.findViewById(id);
       if (tvTotalAmount == null) {
@@ -113,7 +124,7 @@ public final class ActivityViewTransactionDetailsBinding implements ViewBinding 
       }
 
       return new ActivityViewTransactionDetailsBinding((LinearLayout) rootView, btPickDate, imBack,
-          relativeLayout, tvAmounts, tvNames, tvTotalAmount);
+          relativeLayout, tvAmounts, tvNames, tvPDF, tvTotalAmount);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

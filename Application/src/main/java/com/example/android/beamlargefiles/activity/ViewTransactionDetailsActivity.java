@@ -1,7 +1,8 @@
 package com.example.android.beamlargefiles.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ public class ViewTransactionDetailsActivity extends SampleActivityBase {
     public TextView tvNames,tvAmounts,tvTotalAmount,tvPDF;
     public LinearLayout relativeLayout;
     HistoryListItem vehicles;
+    ImageView imPDF;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,12 @@ public class ViewTransactionDetailsActivity extends SampleActivityBase {
 
         findViewById(R.id.imBack).setOnClickListener(view -> {
             finish();
+        });
+
+        imPDF = (ImageView) findViewById(R.id.tvPDF);
+        imPDF.setVisibility(View.GONE);
+        imPDF.setOnClickListener(view -> {
+            Toast.makeText(this, "pdf download", Toast.LENGTH_SHORT).show();
         });
 
         Bundle extras = getIntent().getExtras();

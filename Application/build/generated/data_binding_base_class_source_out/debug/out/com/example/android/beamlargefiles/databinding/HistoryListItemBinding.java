@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.viewbinding.ViewBinding;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.android.beamlargefiles.R;
@@ -31,14 +32,14 @@ public final class HistoryListItemBinding implements ViewBinding {
   public final TextView tvNames;
 
   @NonNull
-  public final TextView tvPDF;
+  public final ImageView tvPDF;
 
   @NonNull
   public final TextView tvTotalAmount;
 
   private HistoryListItemBinding(@NonNull LinearLayout rootView,
       @NonNull LinearLayout relativeLayout, @NonNull TextView tvAmounts, @NonNull TextView tvDate,
-      @NonNull TextView tvNames, @NonNull TextView tvPDF, @NonNull TextView tvTotalAmount) {
+      @NonNull TextView tvNames, @NonNull ImageView tvPDF, @NonNull TextView tvTotalAmount) {
     this.rootView = rootView;
     this.relativeLayout = relativeLayout;
     this.tvAmounts = tvAmounts;
@@ -96,7 +97,7 @@ public final class HistoryListItemBinding implements ViewBinding {
       }
 
       id = R.id.tvPDF;
-      TextView tvPDF = rootView.findViewById(id);
+      ImageView tvPDF = rootView.findViewById(id);
       if (tvPDF == null) {
         break missingId;
       }

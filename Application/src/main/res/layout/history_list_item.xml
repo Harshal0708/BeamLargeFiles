@@ -27,28 +27,34 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="4dp"
                     android:textSize="18sp" />
-                <TextView
+                <ImageView
                     android:id="@+id/tvPDF"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:gravity="center_vertical"
                     android:layout_gravity="end"
-                    android:text="PDF Download"
-                    android:textSize="16sp" />
+                    android:src="@drawable/download_pdf"
+                    android:layout_margin="4dp"
+                    android:padding="6dp"/>
             </FrameLayout>
 
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
+<!--                android:lines="2"-->
+<!--                android:maxLines="2"-->
+<!--                android:minLines="1"-->
                 <TextView
                     android:id="@+id/tvNames"
                     android:layout_width="0dp"
                     android:layout_weight="2.5"
                     android:layout_height="wrap_content"
-                    android:lines="2"
-                    android:maxLines="2"
-                    android:minLines="1"
+
                     android:ellipsize = "end"
                     android:gravity="center_vertical"
                     android:scrollbars = "vertical"
@@ -59,9 +65,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:lines="2"
-                    android:maxLines="2"
-                    android:minLines="1"
+
                     android:ellipsize = "end"
                     android:gravity="end"
                     android:scrollbars = "vertical"
@@ -69,6 +73,7 @@
                     android:textStyle="bold"
                     android:textSize="14sp" />
             </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
 
             <View
                 android:layout_width="match_parent"
