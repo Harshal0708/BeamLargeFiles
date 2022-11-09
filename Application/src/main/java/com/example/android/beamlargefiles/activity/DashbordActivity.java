@@ -76,7 +76,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
     Contact[] myListData2;
     MyListAdapter adapter;
     TextView btPickDate, tvTotalTransacion, tvTotalTransacionAmount;
-    int totalCollection = 0, totalCollectionAmount = 0;
+    int totalCollection = 0, totalCollectionAmount = 0, indexValue = 0;
     String myData = "";
     AlertDialog alertDialog;
     private int request_code = 1;
@@ -87,6 +87,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
     TextView tv1;
     TextView tv2;
     ArrayList<Object> listdata;
+    boolean isSearchDataSave = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,7 +150,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
         };
 
         btPickDate.setOnClickListener(v -> {
-            DatePickerDialog datePickerDialog = new DatePickerDialog(this, dateListener,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH));                 //following line to restrict future date selection
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this, dateListener, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));                 //following line to restrict future date selection
             datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
             datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
             datePickerDialog.show();
@@ -158,6 +159,22 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         etSearch = (EditText) findViewById(R.id.etSearch);
+        //etSearch.setFocusable(false);
+
+        try {
+
+            if (getIntent().getStringExtra("etSearch") != "") {
+                String search = getIntent().getStringExtra("etSearch");
+                etSearch.setText(search);
+
+                searchDataFromList(search);
+
+            }
+        } catch (NullPointerException e) {
+
+        }
+
+
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -165,33 +182,13 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                DatabaseHandler db = new DatabaseHandler(DashbordActivity.this);
-                List<Contact> contacts = db.getAllContacts();
-                ArrayList<Contact> listdata = new ArrayList<Contact>();
-                for (int j = 0; j < contacts.size(); j++) {
-                    Contact cn = contacts.get(j);
-                    String sCode = String.valueOf(cn.getSubhasad_code_no());
-                    if (cn.getName().toLowerCase(Locale.ROOT).contains(charSequence.toString().toLowerCase(Locale.ROOT))
-                            || (sCode.contains(etSearch.getText().toString().trim()))
-                    ) {
-                        listdata.add(cn);
-                    }
-                }
-                Contact[] listData2 = new Contact[listdata.size()];
-                ArrayList<Contact> toDayList = new ArrayList<Contact>();
-                for (int k = 0; k < listdata.size(); k++) {
-                    listData2[k] = listdata.get(k);
-                    if (listdata.get(k).getLastpdateDate().equals("-")) {
-                    } else {
-                        toDayList.add(listdata.get(k));
-                    }
-                }
-                setAdapterData(listData2);
+                searchDataFromList(charSequence.toString());
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
             }
+
         });
 
         DatabaseHandler db = new DatabaseHandler(this);
@@ -206,7 +203,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
             myListData2[i] = new Contact(cn.getID(), cn.getSubhasad_code_no(),
                     cn.getName(), cn.getAddress(),
                     cn.getAmount(), cn.getComment(),
-                    cn.getTotalCollectrdAmount(), cn.getLastpdateDate());
+                    cn.getTotalCollectrdAmount(), cn.getLastpdateDate(), cn.getMobile_number());
             if (cn.getLastpdateDate().equals("-")) {
             } else {
                 toDayList.add(cn);
@@ -237,7 +234,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
             btImportFile.setVisibility(View.VISIBLE);
             flListData.setVisibility(View.GONE);
 
-                fab.hide();
+            fab.hide();
 
         });
 
@@ -256,7 +253,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 
             Button btYes = dialogView.findViewById(R.id.btYes);
             Button btNo = dialogView.findViewById(R.id.btNo);
-            TextView tvMsg= dialogView.findViewById(R.id.tvMsg);
+            TextView tvMsg = dialogView.findViewById(R.id.tvMsg);
             tvMsg.setText("Do you want to add data?");
             btYes.setOnClickListener(v -> {
                 openExplore();
@@ -328,6 +325,42 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: ");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    void searchDataFromList(String searchText) {
+        DatabaseHandler db = new DatabaseHandler(DashbordActivity.this);
+        List<Contact> contacts = db.getAllContacts();
+        ArrayList<Contact> listdata = new ArrayList<Contact>();
+        for (int j = 0; j < contacts.size(); j++) {
+            Contact cn = contacts.get(j);
+            String sCode = String.valueOf(cn.getSubhasad_code_no());
+            if (cn.getName().toLowerCase(Locale.ROOT).contains(searchText.toLowerCase(Locale.ROOT))
+                    || (sCode.contains(searchText.trim()))
+            ) {
+                listdata.add(cn);
+            }
+        }
+        Contact[] listData2 = new Contact[listdata.size()];
+        ArrayList<Contact> toDayList = new ArrayList<Contact>();
+        for (int k = 0; k < listdata.size(); k++) {
+            listData2[k] = listdata.get(k);
+            if (listdata.get(k).getLastpdateDate().equals("-")) {
+            } else {
+                toDayList.add(listdata.get(k));
+            }
+        }
+        setAdapterData(listData2);
+    }
+
+    @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         ViewGroup viewGroup = findViewById(android.R.id.content);
@@ -338,7 +371,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 
         Button btYes = dialogView.findViewById(R.id.btYes);
         Button btNo = dialogView.findViewById(R.id.btNo);
-        TextView tvMsg= dialogView.findViewById(R.id.tvMsg);
+        TextView tvMsg = dialogView.findViewById(R.id.tvMsg);
         tvMsg.setText("Do you want to Exit?");
         btYes.setOnClickListener(v -> {
             finish();
@@ -359,7 +392,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
         alertDialog.show();
 
         Button btOk = dialogView.findViewById(R.id.btOk);
-        TextView tvMsg= dialogView.findViewById(R.id.tvMsg);
+        TextView tvMsg = dialogView.findViewById(R.id.tvMsg);
         tvMsg.setText(msg);
         btOk.setOnClickListener(view -> {
             alertDialog.hide();
@@ -402,8 +435,6 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
         setTodayTotal(toDayList);
         setAdapterData(listData2);
     }
-
-
 
 
     private String getFileName(Uri uri) throws IllegalArgumentException {
@@ -469,7 +500,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 
             List<Contact> contacts = db.getAllContacts();
             for (Contact cn : contacts) {
-                String log = "Id: " + cn.getID() + " ,subhasad_code_no: " + cn.getSubhasad_code_no() + " ,Name: " + cn.getName() + " ,Amount: " + cn.getAmount() + " ,Comment: " + cn.getComment();
+                String log = "Id: " + cn.getID() + " ,subhasad_code_no: " + cn.getSubhasad_code_no() + " ,Name: " + cn.getName() + " ,Amount: " + cn.getAmount() + " ,Comment: " + cn.getComment() + " ,Mobile Number: " + cn.getMobile_number();
             }
             myListData2 = new Contact[contacts.size()];
             ArrayList<Contact> toDayList = new ArrayList<Contact>();
@@ -478,40 +509,58 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
                 myListData2[i] = new Contact(cn.getID(), cn.getSubhasad_code_no(),
                         cn.getName(), cn.getAddress(),
                         cn.getAmount(), cn.getComment(),
-                        cn.getTotalCollectrdAmount(), cn.getLastpdateDate());
+                        cn.getTotalCollectrdAmount(), cn.getLastpdateDate(), cn.getMobile_number());
                 if (cn.getLastpdateDate().equals("-")) {
                 } else {
                     toDayList.add(cn);
                 }
             }
 
-                       SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-                        SharedPreferences.Editor mEdit1 = sp.edit();
-                        String jsonText2 = sp.getString("key", null);
-                        mEdit1.putString("key", null);
-                        mEdit1.apply();
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor mEdit1 = sp.edit();
+            String jsonText2 = sp.getString("key", null);
+            mEdit1.putString("key", null);
+            mEdit1.apply();
 
-                        for (Contact myListData : contacts) {
-                            Contact c = new Contact(myListData.getID(), myListData.getAmount(), myListData.getComment());
-                            db.deleteContact(c);
-                        }
+            for (Contact myListData : contacts) {
+                Contact c = new Contact(myListData.getID(), myListData.getAmount(), myListData.getComment());
+                db.deleteContact(c);
+            }
 
 
-                        for (int i = 1; i < lines.length; i++) {
-                            String[] aa = lines[i].split(",");
-                            db.addContact(new Contact(1, Integer.parseInt(aa[0].trim()), aa[2], aa[4], Integer.parseInt(aa[3]), aa[1], Integer.parseInt(aa[1]), "-"));
-                        }
-                        tv1.setBackgroundResource(R.color.purple_700);
-                        tv2.setBackgroundResource(R.color.white);
-                        btImportFile.setVisibility(View.GONE);
-                        flListData.setVisibility(View.VISIBLE);
+            for (int i = 1; i <= lines.length - 1; i++) {
+                String[] aa = lines[i].split(",");
+
+                Log.d("test", Integer.parseInt(aa[0].trim()) + "");
+                Log.d("test", aa[1] + "");
+                Log.d("test", Integer.parseInt(aa[1]) + "");
+                Log.d("test", aa[2] + "");
+                Log.d("test", Integer.parseInt(aa[3]) + "");
+                Log.d("test", aa[4] + "");
+
+                //  4,000000,Nita R Sonvane  ,056000,01/06/22,000000,9974131343
+
+                try {
+                    db.addContact(new Contact(1, Integer.parseInt(aa[0].trim()), aa[2], aa[4], Integer.parseInt(aa[3]), aa[1], Integer.parseInt(aa[1]), "-", aa[6]));
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    db.addContact(new Contact(1, Integer.parseInt(aa[0].trim()), aa[2], aa[4], Integer.parseInt(aa[3]), aa[1], Integer.parseInt(aa[1]), "-", "-"));
+                }
+
+            }
+
+            tv1.setBackgroundResource(R.color.purple_700);
+            tv2.setBackgroundResource(R.color.white);
+            btImportFile.setVisibility(View.GONE);
+            flListData.setVisibility(View.VISIBLE);
             showAlert("Data Imported successfully");
             Toast.makeText(this, "Data Imported successfully", Toast.LENGTH_SHORT).show();
-                        etSearch.setText("");
-                        finish();
-                        Intent intent = new Intent(DashbordActivity.this, DashbordActivity.class);
-                        startActivity(intent);
+            etSearch.setText("");
+            finish();
+            Intent intent = new Intent(DashbordActivity.this, DashbordActivity.class);
+            startActivity(intent);
         } catch (Exception e) {
+            Log.d("test", e.toString());
+
             e.printStackTrace();
         }
     }
@@ -550,8 +599,8 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
     public void setTodayTotal(ArrayList<Contact> toDayList) {
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if(sp.getString("key", null)!=null){
-            String jsonText2 = "{Contact:["+sp.getString("key", null)+"]}";
+        if (sp.getString("key", null) != null) {
+            String jsonText2 = "{Contact:[" + sp.getString("key", null) + "]}";
             //Converting jsonData string into JSON object
             JSONObject jsnobject = null;
             try {
@@ -564,11 +613,11 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
                 JSONArray jsonArray = jsnobject.getJSONArray("Contact");
                 listdata = new ArrayList<Object>();
                 if (jsonArray != null) {
-                    for (int i=0;i<jsonArray.length();i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         listdata.add(jsonArray.get(i));
                     }
                 }
-                tvTotalTransacion.setText("" +listdata.size());
+                tvTotalTransacion.setText("" + listdata.size());
             } catch (JSONException e) {
                 e.printStackTrace();
 //                tvTotalTransacion.setText("0");
@@ -583,15 +632,77 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
         tvTotalTransacionAmount.setText("" + todayCollectedAmount);
     }
 
-    public void setAdapterData(Contact[] listData) {
+    public void setAdapterData(Contact[] listData3) {
 
-        adapter = new MyListAdapter(this, listData);
+        ArrayList<Contact> listdata4 = new ArrayList<Contact>();
+
+        for (int j = 0; j < listData3.length; j++) {
+            String sNo = String.valueOf(listData3[j].getSubhasad_code_no());
+            Contact cn = listData3[j];
+            if (
+                    (cn.getName().toLowerCase().contains(etSearch.getText().toString().trim().toLowerCase()))
+                            || sNo.toLowerCase().contains(etSearch.getText().toString().trim().toLowerCase())
+            ) {
+                listdata4.add(cn);
+            }
+        }
+        Contact[] listData2 = new Contact[listdata4.size()];
+        ArrayList<Contact> toDayList = new ArrayList<Contact>();
+        Contact[] listDataaaa = new Contact[listdata4.size()];
+        int count = 0;
+        for (int k = 0; k < listdata4.size(); k++) {
+            listData2[k] = (Contact) listdata4.get(k);
+            if (((Contact) listdata4.get(k)).getLastpdateDate().equals("-")) {
+            } else {
+                toDayList.add((Contact) listdata4.get(k));
+            }
+            String sNo = String.valueOf(listdata4.get(k).getSubhasad_code_no());
+            if (
+                    (((Contact) listdata4.get(k)).getName().toLowerCase().contains(etSearch.getText().toString().trim().toLowerCase())
+//                    || ((Contact) sNo.toLowerCase().contains(etSearch.getText().toString().trim().toLowerCase()))
+                            || sNo.toLowerCase().contains(etSearch.getText().toString().trim().toLowerCase())
+                    )) {
+                listDataaaa[count] = (Contact) listdata4.get(k);
+                count++;
+            }
+        }
+
+        if (etSearch.getText().toString().trim().isEmpty()) {
+            adapter = new MyListAdapter(this, listData3);
+        } else {
+
+            List<Contact> list = new ArrayList<Contact>();
+            for (Contact s : listDataaaa) {
+                if (s != null
+//                && s.length() > 0
+                ) {
+                    list.add(s);
+                }
+            }
+            listDataaaa = list.toArray(new Contact[list.size()]);
+            if (isSearchDataSave) {
+                adapter = new MyListAdapter(this, listDataaaa);
+                isSearchDataSave = false;
+
+            } else {
+                adapter = new MyListAdapter(this, listData3);
+                if (getIntent().getStringExtra("etSearch") == null) {
+                    isSearchDataSave = false;
+                } else {
+                    isSearchDataSave = true;
+                }
+            }
+        }
+
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+//        recyclerView.scrollToPosition(indexValue);
         adapter.notifyDataSetChanged();
         adapter.setOnItemClickListener(this);
-        if (listData.length != 0) {
+        // indexValue = 0;
+        if (listData3.length != 0) {
             fab.show();
         } else {
             fab.hide();
@@ -601,65 +712,170 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
     @Override
     public void onItemClickListener(int position, View view, Contact listItem) {
         Contact selectedItem = listItem;//myListData2[position];
+
         String m_sDate2 = selectedItem.getLastpdateDate();
 
         if (m_sDate.equals(m_sDate2)) {
-            showAlert("You will not be able to update this account amount");
+            //showAlert("You will not be able to update this account amount");
+            showAlertDialog(position, view, selectedItem, true);
         } else if (getCurrentDate().equals(m_sDate)) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            ViewGroup viewGroup = findViewById(android.R.id.content);
-            View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.customview, viewGroup, false);
-            EditText etAmount = dialogView
-                    .findViewById(
-                            R.id.etAmount);
-            EditText etComment = dialogView
-                    .findViewById(
-                            R.id.etComment);
-            TextView tvAmount = dialogView
-                    .findViewById(
-                            R.id.tvAmount);
-            Button btn
-                    = dialogView
-                    .findViewById(
-                            R.id.buttonOk);
-            Button buttonSms
-                    = dialogView
-                    .findViewById(
-                            R.id.buttonSms);
-            tvAmount.setText(selectedItem.getName()+"("+selectedItem.getSubhasad_code_no()+")");
-            if(selectedItem.getComment().equals("000000")){
-                etComment.setText("");
-            }else {
-                etComment.setText("" + selectedItem.getComment());
-            }
-            builder.setView(dialogView);
-            AlertDialog alertDialog = builder.create();
-            btn.setOnClickListener(view1 -> {
-                if(inputAmount(etComment.getText().toString().trim())){
-                    updateAmount(selectedItem, etComment.getText().toString().trim(), "save");
-                    alertDialog.hide();
-                }
-            });
-            buttonSms.setOnClickListener(view1 -> {
-                if(inputAmount(etComment.getText().toString().trim())){
-                    updateAmount(selectedItem, etComment.getText().toString().trim(), "sms");
-                    alertDialog.hide();
-                }
-            });
-            alertDialog.show();
+            showAlertDialog(position, view, selectedItem, false);
+
         } else {
             showAlert("You have to select today date to update this item's amount");
         }
     }
 
-    boolean inputAmount(String text){
-        if(text.isEmpty() || Integer.parseInt(text.trim()) == 0){
+    private void showAlertDialog(int position, View view, Contact selectedItem, boolean isBoolean) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.customview, viewGroup, false);
+        EditText etAmount = dialogView
+                .findViewById(
+                        R.id.etAmount);
+        EditText etComment = dialogView
+                .findViewById(
+                        R.id.etComment);
+        TextView tvAmount = dialogView
+                .findViewById(
+                        R.id.tvAmount);
+        Button btn
+                = dialogView
+                .findViewById(
+                        R.id.buttonOk);
+        Button buttonSms
+                = dialogView
+                .findViewById(
+                        R.id.buttonSms);
+
+        TextView etPreviousBal
+                = dialogView
+                .findViewById(
+                        R.id.etPreviousBal);
+        TextView etLastCollectedAmount
+                = dialogView
+                .findViewById(
+                        R.id.etLastCollectedAmount);
+        TextView etCurrentBalance
+                = dialogView
+                .findViewById(
+                        R.id.etCurrentBalance);
+
+        TextView etMobileNumber
+                = dialogView
+                .findViewById(
+                        R.id.etMobileNumber);
+
+        LinearLayout etAmountDetail
+                = dialogView
+                .findViewById(
+                        R.id.etAmountDetail);
+
+        LinearLayout linAmount
+                = dialogView
+                .findViewById(
+                        R.id.linAmount);
+
+        LinearLayout etPreviousBalance
+                = dialogView
+                .findViewById(
+                        R.id.etPreviousBalance);
+
+        LinearLayout etLastCollected
+                = dialogView
+                .findViewById(
+                        R.id.etLastCollected);
+
+        LinearLayout etCurrentBalanceUpdate
+                = dialogView
+                .findViewById(
+                        R.id.etCurrentBalanceUpdate);
+
+        LinearLayout etMobileNo
+                = dialogView
+                .findViewById(
+                        R.id.etMobileNo);
+
+        LinearLayout linBtnSave
+                = dialogView
+                .findViewById(
+                        R.id.linBtnSave);
+        linBtnSave.setVisibility(View.VISIBLE);
+
+        if (isBoolean == true) {
+            etComment.setVisibility(View.GONE);
+            linAmount.setVisibility(View.GONE);
+            btn.setVisibility(View.GONE);
+
+            etAmountDetail.setVisibility(View.VISIBLE);
+            etLastCollected.setVisibility(View.VISIBLE);
+            etCurrentBalanceUpdate.setVisibility(View.VISIBLE);
+            etMobileNo.setVisibility(View.GONE);
+
+            buttonSms.setText("SMS");
+        } else {
+            etComment.setVisibility(View.VISIBLE);
+            linAmount.setVisibility(View.VISIBLE);
+            btn.setVisibility(View.VISIBLE);
+
+            etLastCollected.setVisibility(View.GONE);
+            etCurrentBalanceUpdate.setVisibility(View.GONE);
+            etMobileNo.setVisibility(View.VISIBLE);
+
+        }
+
+        tvAmount.setText(selectedItem.getName() + "(" + selectedItem.getSubhasad_code_no() + ")");
+        etPreviousBal.setText(selectedItem.getAmount() - Integer.parseInt(selectedItem.getComment()) + "");
+        etLastCollectedAmount.setText(selectedItem.getComment());
+        etCurrentBalance.setText(selectedItem.getAmount() + "");
+        etMobileNumber.setText(selectedItem.getMobile_number() + "");
+
+        if (selectedItem.getComment().equals("000000")) {
+            etComment.setText("");
+        } else {
+            etComment.setText("" + selectedItem.getComment());
+        }
+        builder.setView(dialogView);
+        AlertDialog alertDialog = builder.create();
+        btn.setOnClickListener(view1 -> {
+            alertDialog.hide();
+            finish();
+            Intent intent = new Intent(DashbordActivity.this, DashbordActivity.class);
+            intent.putExtra("etSearch", etSearch.getText().toString());
+            startActivity(intent);
+            if (inputAmount(etComment.getText().toString().trim())) {
+                updateAmount(selectedItem, etComment.getText().toString().trim(), "save", position, false);
+                linBtnSave.setVisibility(View.GONE);
+            }
+        });
+        buttonSms.setOnClickListener(view1 -> {
+            linBtnSave.setVisibility(View.GONE);
+            alertDialog.hide();
+            finish();
+            Intent intent = new Intent(DashbordActivity.this, DashbordActivity.class);
+            intent.putExtra("etSearch", etSearch.getText().toString());
+            startActivity(intent);
+            if (inputAmount(etComment.getText().toString().trim())) {
+                if (isBoolean == true) {
+                    updateAmount(selectedItem, etComment.getText().toString().trim(), "sms", position, true);
+                } else {
+                    updateAmount(selectedItem, etComment.getText().toString().trim(), "sms", position, false);
+                }
+
+            }
+
+        });
+        alertDialog.show();
+    }
+
+    boolean inputAmount(String text) {
+        if (text.isEmpty() || Integer.parseInt(text.trim()) == 0) {
             Toast.makeText(this, "Please enter valid amount", Toast.LENGTH_SHORT).show();
             return false;
-        }else {
+        } else {
             char char1 = text.charAt(0);
             char c2 = '0';
-            if(Character.compare(char1 , c2) == 0){
+            if (Character.compare(char1, c2) == 0) {
                 Toast.makeText(this, "Please enter valid amount", Toast.LENGTH_SHORT).show();
                 return false;
             }
@@ -702,7 +918,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
                 vdfdirectory.mkdirs();
             }
             vcfFile = new File(vdfdirectory, "pcrx.dat");
-            storeDataInFile(vcfFile,"email");
+            storeDataInFile(vcfFile, "email");
         } catch (IOException e) {
             e.printStackTrace();
             Log.d(" IOException : ", "");
@@ -737,14 +953,14 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
             Toast.makeText(this, "File Saved in Daily_collection Folder!", Toast.LENGTH_SHORT).show();
             showAlert("File Saved in Daily_collection Folder!");
             vcfFile = new File("/storage/emulated/0/Daily_collection", "pcrx.dat");
-            storeDataInFile(vcfFile,"save");
+            storeDataInFile(vcfFile, "save");
         } catch (IOException e) {
             e.printStackTrace();
             Log.d(" IOException : ", "");
         }
     }
 
-    public void  storeDataInFile(File vcfFile,String buttonType) throws IOException {
+    public void storeDataInFile(File vcfFile, String buttonType) throws IOException {
 
         FileWriter fw = null;
         ArrayList<HistoryListItem> l = new ArrayList<HistoryListItem>();
@@ -758,7 +974,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
         ArrayList<Contact> toDayList = new ArrayList<Contact>();
         for (int i = 0; i < contacts.size(); i++) {
             Contact cn = contacts.get(i);
-            myListData2[i] = new Contact(cn.getID(),cn.getSubhasad_code_no(),cn.getName(), cn.getAddress(),cn.getAmount(), cn.getComment(),cn.getTotalCollectrdAmount(), cn.getLastpdateDate());
+            myListData2[i] = new Contact(cn.getID(), cn.getSubhasad_code_no(), cn.getName(), cn.getAddress(), cn.getAmount(), cn.getComment(), cn.getTotalCollectrdAmount(), cn.getLastpdateDate(), cn.getMobile_number());
             if (cn.getLastpdateDate().equals("-")) {
             } else {
                 toDayList.add(cn);
@@ -774,10 +990,10 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
         String addTT = "";
         String t = String.valueOf(todayCollectedCount);
         String ss = String.valueOf(todayCollectedAmount);
-        for(int i=0;i<16;i++){
-            if(i<ss.length()){
+        for (int i = 0; i < 16; i++) {
+            if (i < ss.length()) {
                 addTT = addTT.concat(String.valueOf(ss.charAt(i)));
-            }else {
+            } else {
                 addTT = addTT.concat(" ");
             }
         }
@@ -806,14 +1022,14 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 //                    "," + cDate +
 //                    "," + "12341234\n");
 
-        l.add(new HistoryListItem(00,"  1000" +
+        l.add(new HistoryListItem(00, "  1000" +
                 "," + addZero1 + todayCollectedCount +
                 "," //+ addZero2 + (int) todayCollectedAmount + addZero112
 //                    +tcc+
-                +addTT+
+                + addTT +
                 ",001001" +
                 "," + cDate +
-                ",12341234" +"\n"));
+                ",12341234" + "\n"));
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         String jsonText2 = "{Contact:[" + sp.getString("key", null) + "]}";
         //Converting jsonData string into JSON object
@@ -884,7 +1100,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 
             } else {
 //                    fw.write(log);
-                l.add(new HistoryListItem(Integer.parseInt(cn.getLastpdateDate().substring(0,2)),log));
+                l.add(new HistoryListItem(Integer.parseInt(cn.getLastpdateDate().substring(0, 2)), log));
             }
         }
 
@@ -922,17 +1138,17 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
             if (cn.getComment().equals("000000")) {  //m_sDate
             } else {
 //                    fw.write(log);
-                l.add(new HistoryListItem(Integer.parseInt(cn.getLastpdateDate().substring(0,2)),log));
+                l.add(new HistoryListItem(Integer.parseInt(cn.getLastpdateDate().substring(0, 2)), log));
             }
         }
 
         Collections.sort(l);
-ArrayList<HistoryListItem> aaa = l;
-        for (HistoryListItem item:l) {
+        ArrayList<HistoryListItem> aaa = l;
+        for (HistoryListItem item : l) {
             fw.write(item.date);
         }
         fw.close();
-        if(buttonType.equals("email")){
+        if (buttonType.equals("email")) {
             File fileToShare = vcfFile;
             if (fileToShare == null || !fileToShare.exists()) {
                 Toast.makeText(this, "text_generated_file_error", Toast.LENGTH_SHORT).show();
@@ -940,75 +1156,106 @@ ArrayList<HistoryListItem> aaa = l;
             }
 
             Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-            Uri apkURI = FileProvider.getUriForFile(getApplicationContext(),getApplicationContext().getPackageName() + ".provider", fileToShare);
+            Uri apkURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", fileToShare);
             intentShareFile.setDataAndType(apkURI, URLConnection.guessContentTypeFromName(fileToShare.getName()));
             intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intentShareFile.putExtra(Intent.EXTRA_STREAM,apkURI);
+            intentShareFile.putExtra(Intent.EXTRA_STREAM, apkURI);
             startActivity(Intent.createChooser(intentShareFile, "Share File"));
-        }else {
+        } else {
 
         }
     }
 
-    public void updateAmount(Contact selectedItem, String amount, String buttonEvent) {
-        int totalA = selectedItem.getAmount() + Integer.parseInt(amount);
-        int totalCollectedAmount = selectedItem.getTotalCollectrdAmount() + Integer.parseInt(amount);
-        Contact currentItem = new Contact(selectedItem.getID(), selectedItem.getSubhasad_code_no(), selectedItem.getName(), selectedItem.getAddress(),
-//                selectedItem.getAmount(), selectedItem.getComment(), selectedItem.getTotalCollectrdAmount(), m_sDate);
-                totalA, amount, totalCollectedAmount, m_sDate);
-        Contact updatedItem = new Contact(selectedItem.getID(), selectedItem.getSubhasad_code_no(), selectedItem.getName(),
-                selectedItem.getAddress(), totalA, amount, totalCollectedAmount, m_sDate);
-        DatabaseHandler db = new DatabaseHandler(this);
-        db.updateContact(updatedItem);
+    public void updateAmount(Contact selectedItem, String amount, String buttonEvent, int pos, boolean isBoolean) {
 
-        List<Contact> contacts = db.getAllContacts();
-        ArrayList<Contact> toDayList = new ArrayList<Contact>();
-        for (int i = 0; i < contacts.size(); i++) {
-            Contact cn = contacts.get(i);
-            myListData2[i] = new Contact(cn.getID(),
-                    cn.getSubhasad_code_no(),
-                    cn.getName(), cn.getAddress(),
-                    cn.getAmount(), cn.getComment(),
-                    cn.getTotalCollectrdAmount(), cn.getLastpdateDate());
-            if (cn.getLastpdateDate().equals("-")) {
+        if (isBoolean == false) {
+            int totalA = selectedItem.getAmount() + Integer.parseInt(amount);
+            int totalCollectedAmount = selectedItem.getTotalCollectrdAmount() + Integer.parseInt(amount);
+            Contact currentItem = new Contact(selectedItem.getID(), selectedItem.getSubhasad_code_no(), selectedItem.getName(), selectedItem.getAddress(),
+//                selectedItem.getAmount(), selectedItem.getComment(), selectedItem.getTotalCollectrdAmount(), m_sDate);
+                    totalA, amount, totalCollectedAmount, m_sDate, selectedItem.getMobile_number());
+            Contact updatedItem = new Contact(selectedItem.getID(), selectedItem.getSubhasad_code_no(), selectedItem.getName(),
+                    selectedItem.getAddress(), totalA, amount, totalCollectedAmount, m_sDate, selectedItem.getMobile_number());
+            DatabaseHandler db = new DatabaseHandler(this);
+            db.updateContact(updatedItem);
+
+            List<Contact> contacts = db.getAllContacts();
+            ArrayList<Contact> toDayList = new ArrayList<Contact>();
+            for (int i = 0; i < contacts.size(); i++) {
+                Contact cn = contacts.get(i);
+                myListData2[i] = new Contact(cn.getID(),
+                        cn.getSubhasad_code_no(),
+                        cn.getName(), cn.getAddress(),
+                        cn.getAmount(), cn.getComment(),
+                        cn.getTotalCollectrdAmount(), cn.getLastpdateDate(), cn.getMobile_number());
+                if (cn.getLastpdateDate().equals("-")) {
+                } else {
+                    toDayList.add(cn);
+                }
+            }
+
+//            indexValue = pos;
+            isSearchDataSave = true;
+            setAdapterData(myListData2);
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor mEdit1 = sp.edit();
+            String jsonText2 = sp.getString("key", null);
+            if (jsonText2 == null) {
+                jsonText2 = "";
+                mEdit1.putString("key", jsonText2.concat(currentItem.toString()));
             } else {
-                toDayList.add(cn);
+                mEdit1.putString("key", jsonText2.concat("," + currentItem));
+            }
+            mEdit1.apply();
+
+            setTodayTotal(toDayList);
+//            etSearch.setText("");
+
+//            adapter.notifyDataSetChanged();
+            if (buttonEvent.equals("sms")) {
+                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                if (selectedItem.getMobile_number().equals("-")) {
+                    sendIntent.setData(Uri.parse("sms:9427868504"));
+                } else {
+                    sendIntent.setData(Uri.parse("sms:" + selectedItem.getMobile_number()));
+                }
+                String msg = "SITARAM G.MALI Co-Op CRE SOC\n" +
+                        "Name - " + updatedItem.getName() + "\n" +
+                        "AC. no - " + updatedItem.getSubhasad_code_no() + "\n" +
+                        "PRV. BAL - " + (updatedItem.getAmount() - Integer.parseInt(amount)) + "\n" +
+                        "DEP.AMT - " + amount + "\n" +
+                        "CUR.BAL - " + updatedItem.getAmount() + "\n" +
+                        "Last Date - " + updatedItem.getLastpdateDate() + "\n" +
+                        "Thank You!!";
+                sendIntent.putExtra("sms_body", msg);
+                startActivity(sendIntent);
+            } else { //save
+                showAlert("Amount Updated Successfully");
+            }
+
+        } else {
+            if (buttonEvent.equals("sms")) {
+                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                //sendIntent.setData(Uri.parse("sms:8460298962"));
+                if (selectedItem.getMobile_number().equals("-")) {
+                    sendIntent.setData(Uri.parse("sms:9427868504"));
+                } else {
+                    sendIntent.setData(Uri.parse("sms:" + selectedItem.getMobile_number()));
+                }
+                String msg = "SITARAM G.MALI Co-Op CRE SOC\n" +
+                        "Name - " + selectedItem.getName() + "\n" +
+                        "AC. no - " + selectedItem.getSubhasad_code_no() + "\n" +
+                        "PRV. BAL - " + (selectedItem.getAmount() - Integer.parseInt(amount)) + "\n" +
+                        "DEP.AMT - " + amount + "\n" +
+                        "CUR.BAL - " + selectedItem.getAmount() + "\n" +
+                        "Last Date - " + selectedItem.getLastpdateDate() + "\n" +
+                        "Thank You!!";
+                sendIntent.putExtra("sms_body", msg);
+                startActivity(sendIntent);
+//            showAlert("Amount Updated Successfully & SMS Sent Successfully");
             }
         }
-
-
-        setAdapterData(myListData2);
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor mEdit1 = sp.edit();
-        String jsonText2 = sp.getString("key", null);
-        if (jsonText2 == null) {
-            jsonText2 = "";
-            mEdit1.putString("key", jsonText2.concat(currentItem.toString()));
-        } else {
-            mEdit1.putString("key", jsonText2.concat("," + currentItem));
-        }
-        mEdit1.apply();
-
-        setTodayTotal(toDayList);
-        etSearch.setText("");
-        adapter.notifyDataSetChanged();
-        if (buttonEvent.equals("sms")) {
-            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-            sendIntent.setData(Uri.parse("sms:8460298962"));
-
-
-            String msg = "LATE SITARAM .G. MALI SEVING CREDIT SO. LTD\n" +
-                    "Name :- "+updatedItem.getName()+"\n" +
-                    "AC. no :- "+updatedItem.getSubhasad_code_no()+"\n" +
-                    "Current Balance :- "+updatedItem.getAmount()+"\n" +
-                    "Last Collected Amount :- "+amount+"\n" +
-                    "Thank You!!";
-            sendIntent.putExtra("sms_body", msg);
-            startActivity(sendIntent);
-//            showAlert("Amount Updated Successfully & SMS Sent Successfully");
-        } else { //save
-            showAlert("Amount Updated Successfully");
-        }
     }
+
 
 }

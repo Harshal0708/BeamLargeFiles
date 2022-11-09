@@ -36,7 +36,8 @@
         </activity>
         <activity
             android:name="com.example.android.beamlargefiles.activity.DashbordActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.example.android.beamlargefiles.activity.ViewTransactionHistoryActivity"

@@ -30,19 +30,68 @@ public final class CustomviewBinding implements ViewBinding {
   public final EditText etAmount;
 
   @NonNull
+  public final LinearLayout etAmountDetail;
+
+  @NonNull
   public final EditText etComment;
+
+  @NonNull
+  public final TextView etCurrentBalance;
+
+  @NonNull
+  public final LinearLayout etCurrentBalanceUpdate;
+
+  @NonNull
+  public final LinearLayout etLastCollected;
+
+  @NonNull
+  public final TextView etLastCollectedAmount;
+
+  @NonNull
+  public final LinearLayout etMobileNo;
+
+  @NonNull
+  public final TextView etMobileNumber;
+
+  @NonNull
+  public final TextView etPreviousBal;
+
+  @NonNull
+  public final LinearLayout etPreviousBalance;
+
+  @NonNull
+  public final LinearLayout linAmount;
+
+  @NonNull
+  public final LinearLayout linBtnSave;
 
   @NonNull
   public final TextView tvAmount;
 
   private CustomviewBinding(@NonNull LinearLayout rootView, @NonNull Button buttonOk,
-      @NonNull Button buttonSms, @NonNull EditText etAmount, @NonNull EditText etComment,
-      @NonNull TextView tvAmount) {
+      @NonNull Button buttonSms, @NonNull EditText etAmount, @NonNull LinearLayout etAmountDetail,
+      @NonNull EditText etComment, @NonNull TextView etCurrentBalance,
+      @NonNull LinearLayout etCurrentBalanceUpdate, @NonNull LinearLayout etLastCollected,
+      @NonNull TextView etLastCollectedAmount, @NonNull LinearLayout etMobileNo,
+      @NonNull TextView etMobileNumber, @NonNull TextView etPreviousBal,
+      @NonNull LinearLayout etPreviousBalance, @NonNull LinearLayout linAmount,
+      @NonNull LinearLayout linBtnSave, @NonNull TextView tvAmount) {
     this.rootView = rootView;
     this.buttonOk = buttonOk;
     this.buttonSms = buttonSms;
     this.etAmount = etAmount;
+    this.etAmountDetail = etAmountDetail;
     this.etComment = etComment;
+    this.etCurrentBalance = etCurrentBalance;
+    this.etCurrentBalanceUpdate = etCurrentBalanceUpdate;
+    this.etLastCollected = etLastCollected;
+    this.etLastCollectedAmount = etLastCollectedAmount;
+    this.etMobileNo = etMobileNo;
+    this.etMobileNumber = etMobileNumber;
+    this.etPreviousBal = etPreviousBal;
+    this.etPreviousBalance = etPreviousBalance;
+    this.linAmount = linAmount;
+    this.linBtnSave = linBtnSave;
     this.tvAmount = tvAmount;
   }
 
@@ -91,9 +140,75 @@ public final class CustomviewBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.etAmountDetail;
+      LinearLayout etAmountDetail = rootView.findViewById(id);
+      if (etAmountDetail == null) {
+        break missingId;
+      }
+
       id = R.id.etComment;
       EditText etComment = rootView.findViewById(id);
       if (etComment == null) {
+        break missingId;
+      }
+
+      id = R.id.etCurrentBalance;
+      TextView etCurrentBalance = rootView.findViewById(id);
+      if (etCurrentBalance == null) {
+        break missingId;
+      }
+
+      id = R.id.etCurrentBalanceUpdate;
+      LinearLayout etCurrentBalanceUpdate = rootView.findViewById(id);
+      if (etCurrentBalanceUpdate == null) {
+        break missingId;
+      }
+
+      id = R.id.etLastCollected;
+      LinearLayout etLastCollected = rootView.findViewById(id);
+      if (etLastCollected == null) {
+        break missingId;
+      }
+
+      id = R.id.etLastCollectedAmount;
+      TextView etLastCollectedAmount = rootView.findViewById(id);
+      if (etLastCollectedAmount == null) {
+        break missingId;
+      }
+
+      id = R.id.etMobileNo;
+      LinearLayout etMobileNo = rootView.findViewById(id);
+      if (etMobileNo == null) {
+        break missingId;
+      }
+
+      id = R.id.etMobileNumber;
+      TextView etMobileNumber = rootView.findViewById(id);
+      if (etMobileNumber == null) {
+        break missingId;
+      }
+
+      id = R.id.etPreviousBal;
+      TextView etPreviousBal = rootView.findViewById(id);
+      if (etPreviousBal == null) {
+        break missingId;
+      }
+
+      id = R.id.etPreviousBalance;
+      LinearLayout etPreviousBalance = rootView.findViewById(id);
+      if (etPreviousBalance == null) {
+        break missingId;
+      }
+
+      id = R.id.linAmount;
+      LinearLayout linAmount = rootView.findViewById(id);
+      if (linAmount == null) {
+        break missingId;
+      }
+
+      id = R.id.linBtnSave;
+      LinearLayout linBtnSave = rootView.findViewById(id);
+      if (linBtnSave == null) {
         break missingId;
       }
 
@@ -104,7 +219,9 @@ public final class CustomviewBinding implements ViewBinding {
       }
 
       return new CustomviewBinding((LinearLayout) rootView, buttonOk, buttonSms, etAmount,
-          etComment, tvAmount);
+          etAmountDetail, etComment, etCurrentBalance, etCurrentBalanceUpdate, etLastCollected,
+          etLastCollectedAmount, etMobileNo, etMobileNumber, etPreviousBal, etPreviousBalance,
+          linAmount, linBtnSave, tvAmount);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

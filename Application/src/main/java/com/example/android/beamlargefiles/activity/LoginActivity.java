@@ -55,6 +55,7 @@ public class LoginActivity extends SampleActivityBase {
 //                }
             }
         });
+
         etPass.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {}
             public void beforeTextChanged(CharSequence s, int start,int count, int after) {}
@@ -87,7 +88,10 @@ public class LoginActivity extends SampleActivityBase {
 
             if(un.equals("User1")||un.equals("User2")||un.equals("User3")||un.equals("User4")){
                 if(pass.equals("123")){
-                        startActivity(new Intent(LoginActivity.this, DashbordActivity.class));
+                    Intent intent = new Intent(LoginActivity.this,DashbordActivity.class);
+                    intent.putExtra("etSearch","");
+                    startActivity(intent);
+//                        startActivity(new Intent(LoginActivity.this, DashbordActivity.class));
                 }else {
                     Toast.makeText(this, "Invalid Password", Toast.LENGTH_SHORT).show();
                 }

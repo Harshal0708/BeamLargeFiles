@@ -23,7 +23,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_COMMENT = "comment";
     private static final String KEY_COLLECTED_AMOUNT = "totalCollectedAmount";
     private static final String KEY_LAST_UPDATE_DATE = "lastupdateDate";
-
+    private static final String KEY_MOBILE_NUMBER = "mobilenumber";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -35,8 +35,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_CODE_NO + " INTEGER ," +  KEY_NAME + " TEXT,"
-                + KEY_ADDRESS + " TEXT,"+ KEY_AMOUNT + " DOUBLE,"+ KEY_COMMENT + " TEXT," + KEY_COLLECTED_AMOUNT + " DOUBLE,"+ KEY_LAST_UPDATE_DATE + " TEXT"  + ")";
+                + KEY_ADDRESS + " TEXT,"+ KEY_AMOUNT + " DOUBLE,"+ KEY_COMMENT + " TEXT," + KEY_COLLECTED_AMOUNT
+                + " DOUBLE,"+ KEY_LAST_UPDATE_DATE + " TEXT," + KEY_MOBILE_NUMBER + " TEXT"  + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
+
     }
 
     // Upgrading database
@@ -60,6 +62,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_COMMENT, contact.getComment());
         values.put(KEY_COLLECTED_AMOUNT, contact.getTotalCollectrdAmount());
         values.put(KEY_LAST_UPDATE_DATE, contact.getLastpdateDate());
+        values.put(KEY_MOBILE_NUMBER, contact.getMobile_number());
         // Inserting Row
         db.insert(TABLE_CONTACTS, null, values);
         //2nd argument is String containing nullColumnHack
@@ -67,25 +70,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // code to get the single contact
-    Contact getContact(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(TABLE_CONTACTS, new String[] { KEY_ID,KEY_CODE_NO,
-                        KEY_NAME, KEY_ADDRESS,KEY_AMOUNT,KEY_COMMENT,KEY_COLLECTED_AMOUNT,KEY_LAST_UPDATE_DATE }, KEY_ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
-        return new Contact(
-                cursor.getInt(0),
-                cursor.getInt(1),
-                cursor.getString(2),
-                cursor.getString(3),
-                cursor.getInt(4),
-                cursor.getString(5),
-                cursor.getInt(6),
-                cursor.getString(7)
-        );
-    }
+//    Contact getContact(int id) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//        Cursor cursor = db.query(TABLE_CONTACTS, new String[] { KEY_ID,KEY_CODE_NO,
+//                        KEY_NAME, KEY_ADDRESS,KEY_AMOUNT,KEY_COMMENT,KEY_COLLECTED_AMOUNT,KEY_LAST_UPDATE_DATE,KEY_MOBILE_NUMBER }, KEY_ID + "=?",
+//                new String[] { String.valueOf(id) }, null, null, null, null);
+//        if (cursor != null)
+//            cursor.moveToFirst();
+//        return new Contact(
+//                cursor.getInt(0),
+//                cursor.getInt(1),
+//                cursor.getString(2),
+//                cursor.getString(3),
+//                cursor.getInt(4),
+//                cursor.getString(5),
+//                cursor.getInt(6),
+//                cursor.getString(7),
+//                cursor.getString(8)
+//        );
+//    }
 
     // code to get all contacts in a list view
     public List<Contact> getAllContacts() {
@@ -109,6 +113,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 contact.setComment(cursor.getString(5));
                 contact.setTotalCollectrdAmount(Integer.parseInt(cursor.getString(6)));
                 contact.setLastpdateDate(cursor.getString(7));
+                contact.setMobile_number(cursor.getString(8));
                 // Adding contact to list
                 contactList.add(contact);
             } while (cursor.moveToNext());
@@ -130,6 +135,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_COMMENT, contact.getComment());
         values.put(KEY_COLLECTED_AMOUNT, contact.getTotalCollectrdAmount());
         values.put(KEY_LAST_UPDATE_DATE, contact.getLastpdateDate());
+        values.put(KEY_MOBILE_NUMBER, contact.getMobile_number());
         // updating row
         return db.update(TABLE_CONTACTS, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(contact.getID()) });

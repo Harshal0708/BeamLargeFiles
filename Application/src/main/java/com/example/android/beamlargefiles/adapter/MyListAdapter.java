@@ -42,16 +42,27 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Contact myListData = listdata[position];
+        try{
         holder.textView.setText(": "+listdata[position].getName());
         holder.tvAddress.setText(": "+listdata[position].getAddress());
-        holder.tvAmount.setText(": "+listdata[position].getAmount());
+
         holder.tvAmountLastDate.setText(": "+listdata[position].getLastpdateDate());
         holder.tvACno.setText(": "+listdata[position].getSubhasad_code_no());
-        holder.tvMobileNo.setText(": - ");
-        if(listdata[position].getComment().equals("000000")){
-            holder.tvAmountSub.setText(": 0");
+
+        if(listdata[position].getMobile_number().equals("")){
+            holder.tvMobileNo.setText(": - ");
         }else {
-            holder.tvAmountSub.setText(": "+listdata[position].getComment());
+            holder.tvMobileNo.setText(": " +listdata[position].getMobile_number());
+        }
+
+        if(listdata[position].getComment().equals("000000")){
+            holder.tvPreAmount.setText(": "+listdata[position].getAmount());
+            holder.tvAmountSub.setText(": 0");
+            holder.tvCurrentAmount.setText(": "+(Integer.parseInt(listdata[position].getComment())));
+        }else {
+            holder.tvPreAmount.setText(": "+(listdata[position].getAmount()-Integer.parseInt(listdata[position].getComment())));
+            holder.tvAmountSub.setText(": "+(listdata[position].getComment()));
+            holder.tvCurrentAmount.setText(": "+(listdata[position].getAmount()));
         }
         String today = getCurrentDate();
         String itemDAte = listdata[position].getLastpdateDate();
@@ -61,6 +72,9 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
         }else{
             holder.relativeLayout.setBackgroundResource(R.drawable.border);
             holder.checkItem.setVisibility(View.GONE);
+        }
+        }catch (NullPointerException e){
+
         }
     }
 
@@ -79,18 +93,19 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView checkItem;
-        public TextView textView,tvAddress,tvAmount,tvAmountSub,tvAmountLastDate,tvACno,tvMobileNo;
+        public TextView textView,tvAddress,tvPreAmount,tvAmountSub,tvAmountLastDate,tvACno,tvMobileNo,tvCurrentAmount;
         public LinearLayout relativeLayout;
         public ViewHolder(View itemView) {
             super(itemView);
             this.checkItem = (ImageView) itemView.findViewById(R.id.checkItem);
             this.textView = (TextView) itemView.findViewById(R.id.textView);
             this.tvAddress = (TextView) itemView.findViewById(R.id.tvAddress);
-            this.tvAmount = (TextView) itemView.findViewById(R.id.tvAmount);
+            this.tvPreAmount = (TextView) itemView.findViewById(R.id.tvPreAmount);
             this.tvAmountSub = (TextView) itemView.findViewById(R.id.tvAmountSub);
             this.tvAmountLastDate = (TextView) itemView.findViewById(R.id.tvAmountLastDate);
             this.tvACno = (TextView) itemView.findViewById(R.id.tvACno);
             this.tvMobileNo = (TextView) itemView.findViewById(R.id.tvMobileNo);
+            this.tvCurrentAmount = (TextView) itemView.findViewById(R.id.tvCurrentAmount);
             relativeLayout = (LinearLayout) itemView.findViewById(R.id.relativeLayout);
             relativeLayout.setOnClickListener(this);
         }
@@ -100,13 +115,12 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
             sSelected = getAdapterPosition();
             addressIndex = getAdapterPosition();
             sClickListener.onItemClickListener(getAdapterPosition(), view,listdata[getAdapterPosition()]);
-            Log.d("Clickced :: ","CLicked "+listdata[getAdapterPosition()]);
         }
     }
 
     public void setOnItemClickListener(ItemClickListener clickListener) {
         sClickListener = clickListener;
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 
     public interface ItemClickListener {

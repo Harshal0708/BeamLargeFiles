@@ -24,7 +24,7 @@
 14-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:11:22-76
 15
 16    <application
-16-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:13:5-55:19
+16-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:13:5-56:19
 17        android:allowBackup="true"
 17-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:14:9-35
 18        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
@@ -63,49 +63,51 @@
 35-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:29:13-36
 36        </activity>
 37        <activity
-37-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:31:9-34:20
+37-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:31:9-35:20
 38            android:name="com.example.android.beamlargefiles.activity.DashbordActivity"
-38-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:32:13-54
-39            android:exported="true" >
-39-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:33:13-36
-40        </activity>
-41        <activity
-41-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:35:9-37:40
-42            android:name="com.example.android.beamlargefiles.activity.ViewTransactionHistoryActivity"
-42-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:36:13-68
-43            android:exported="false" />
-43-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:37:13-37
-44        <activity
-44-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:38:9-40:39
-45            android:name="com.example.android.beamlargefiles.activity.ViewTransactionDetailsActivity"
-45-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:39:13-68
-46            android:exported="true" />
-46-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:40:13-36
-47
-48        <provider
-48-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:42:9-45:39
-49            android:name="com.example.android.common.assetprovider.AssetProvider"
-49-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:43:13-82
-50            android:authorities="com.example.android.beamlargefiles.files"
-50-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:44:13-75
-51            android:exported="true" />
-51-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:45:13-36
-52        <provider
-53            android:name="android.support.v4.content.FileProvider"
-53-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:47:13-67
-54            android:authorities="com.example.android.beamlargefiles.provider"
-54-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:48:13-60
-55            android:exported="false"
-55-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:49:13-37
-56            android:grantUriPermissions="true" >
-56-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:50:13-47
-57            <meta-data
-57-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:51:13-53:58
-58                android:name="android.support.FILE_PROVIDER_PATHS"
-58-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:52:17-67
-59                android:resource="@xml/provider_paths" />
-59-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:53:17-55
-60        </provider>
-61    </application>
-62
-63</manifest>
+38-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:33:13-54
+39            android:exported="true"
+39-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:34:13-36
+40            android:windowSoftInputMode="stateHidden" >
+40-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:32:13-54
+41        </activity>
+42        <activity
+42-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:36:9-38:40
+43            android:name="com.example.android.beamlargefiles.activity.ViewTransactionHistoryActivity"
+43-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:37:13-68
+44            android:exported="false" />
+44-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:38:13-37
+45        <activity
+45-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:39:9-41:39
+46            android:name="com.example.android.beamlargefiles.activity.ViewTransactionDetailsActivity"
+46-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:40:13-68
+47            android:exported="true" />
+47-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:41:13-36
+48
+49        <provider
+49-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:43:9-46:39
+50            android:name="com.example.android.common.assetprovider.AssetProvider"
+50-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:44:13-82
+51            android:authorities="com.example.android.beamlargefiles.files"
+51-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:45:13-75
+52            android:exported="true" />
+52-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:46:13-36
+53        <provider
+54            android:name="android.support.v4.content.FileProvider"
+54-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:48:13-67
+55            android:authorities="com.example.android.beamlargefiles.provider"
+55-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:49:13-60
+56            android:exported="false"
+56-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:50:13-37
+57            android:grantUriPermissions="true" >
+57-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:51:13-47
+58            <meta-data
+58-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:52:13-54:58
+59                android:name="android.support.FILE_PROVIDER_PATHS"
+59-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:53:17-67
+60                android:resource="@xml/provider_paths" />
+60-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:54:17-55
+61        </provider>
+62    </application>
+63
+64</manifest>

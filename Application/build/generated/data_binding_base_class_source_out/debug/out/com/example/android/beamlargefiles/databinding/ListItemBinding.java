@@ -35,31 +35,36 @@ public final class ListItemBinding implements ViewBinding {
   public final TextView tvAddress;
 
   @NonNull
-  public final TextView tvAmount;
-
-  @NonNull
   public final TextView tvAmountLastDate;
 
   @NonNull
   public final TextView tvAmountSub;
 
   @NonNull
+  public final TextView tvCurrentAmount;
+
+  @NonNull
   public final TextView tvMobileNo;
+
+  @NonNull
+  public final TextView tvPreAmount;
 
   private ListItemBinding(@NonNull LinearLayout rootView, @NonNull ImageView checkItem,
       @NonNull LinearLayout relativeLayout, @NonNull TextView textView, @NonNull TextView tvACno,
-      @NonNull TextView tvAddress, @NonNull TextView tvAmount, @NonNull TextView tvAmountLastDate,
-      @NonNull TextView tvAmountSub, @NonNull TextView tvMobileNo) {
+      @NonNull TextView tvAddress, @NonNull TextView tvAmountLastDate,
+      @NonNull TextView tvAmountSub, @NonNull TextView tvCurrentAmount,
+      @NonNull TextView tvMobileNo, @NonNull TextView tvPreAmount) {
     this.rootView = rootView;
     this.checkItem = checkItem;
     this.relativeLayout = relativeLayout;
     this.textView = textView;
     this.tvACno = tvACno;
     this.tvAddress = tvAddress;
-    this.tvAmount = tvAmount;
     this.tvAmountLastDate = tvAmountLastDate;
     this.tvAmountSub = tvAmountSub;
+    this.tvCurrentAmount = tvCurrentAmount;
     this.tvMobileNo = tvMobileNo;
+    this.tvPreAmount = tvPreAmount;
   }
 
   @Override
@@ -115,12 +120,6 @@ public final class ListItemBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.tvAmount;
-      TextView tvAmount = rootView.findViewById(id);
-      if (tvAmount == null) {
-        break missingId;
-      }
-
       id = R.id.tvAmountLastDate;
       TextView tvAmountLastDate = rootView.findViewById(id);
       if (tvAmountLastDate == null) {
@@ -133,14 +132,27 @@ public final class ListItemBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvCurrentAmount;
+      TextView tvCurrentAmount = rootView.findViewById(id);
+      if (tvCurrentAmount == null) {
+        break missingId;
+      }
+
       id = R.id.tvMobileNo;
       TextView tvMobileNo = rootView.findViewById(id);
       if (tvMobileNo == null) {
         break missingId;
       }
 
+      id = R.id.tvPreAmount;
+      TextView tvPreAmount = rootView.findViewById(id);
+      if (tvPreAmount == null) {
+        break missingId;
+      }
+
       return new ListItemBinding((LinearLayout) rootView, checkItem, relativeLayout, textView,
-          tvACno, tvAddress, tvAmount, tvAmountLastDate, tvAmountSub, tvMobileNo);
+          tvACno, tvAddress, tvAmountLastDate, tvAmountSub, tvCurrentAmount, tvMobileNo,
+          tvPreAmount);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

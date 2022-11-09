@@ -22,8 +22,8 @@ com/example/android/common/logger/LogNode.java
  com.example.android.common.logger.LogNode
 com/example/android/beamlargefiles/models/Contact.java
  com.example.android.beamlargefiles.models.Contact
-com/example/android/beamlargefiles/activity/SplashActivity.java
- com.example.android.beamlargefiles.activity.SplashActivity
+com/example/android/beamlargefiles/BuildConfig.java
+ com.example.android.beamlargefiles.BuildConfig
 com/example/android/common/logger/Log.java
  com.example.android.common.logger.Log
 com/example/android/common/assetprovider/AssetProvider.java
@@ -62,11 +62,11 @@ com/example/android/beamlargefiles/activity/DashbordActivity.java
  com.example.android.beamlargefiles.activity.DashbordActivity$1
 com/example/android/beamlargefiles/databinding/HistoryListItemBinding.java
  com.example.android.beamlargefiles.databinding.HistoryListItemBinding
+com/example/android/beamlargefiles/singleton/SingletonClass.java
+ com.example.android.beamlargefiles.singleton.SingletonClass
+com/example/android/beamlargefiles/activity/SplashActivity.java
+ com.example.android.beamlargefiles.activity.SplashActivity
 com/example/android/beamlargefiles/activity/LoginActivity.java
  com.example.android.beamlargefiles.activity.LoginActivity
  com.example.android.beamlargefiles.activity.LoginActivity$1
  com.example.android.beamlargefiles.activity.LoginActivity$2
-com/example/android/beamlargefiles/singleton/SingletonClass.java
- com.example.android.beamlargefiles.singleton.SingletonClass
-com/example/android/beamlargefiles/BuildConfig.java
- com.example.android.beamlargefiles.BuildConfig
