@@ -1,5 +1,9 @@
 com/example/android/beamlargefiles/databinding/ListItemBinding.java
  com.example.android.beamlargefiles.databinding.ListItemBinding
+com/example/android/beamlargefiles/apiManager/JsonPlaceHolderApi.java
+ com.example.android.beamlargefiles.apiManager.JsonPlaceHolderApi
+com/example/android/beamlargefiles/apiManager/SmsResponse.java
+ com.example.android.beamlargefiles.apiManager.SmsResponse
 com/example/android/beamlargefiles/utils/DatabaseHandler.java
  com.example.android.beamlargefiles.utils.DatabaseHandler
 com/example/android/common/activities/SampleActivityBase.java
@@ -18,12 +22,14 @@ com/example/android/common/logger/MessageOnlyLogFilter.java
  com.example.android.common.logger.MessageOnlyLogFilter
 com/example/android/beamlargefiles/databinding/ExportpopupBinding.java
  com.example.android.beamlargefiles.databinding.ExportpopupBinding
+com/example/android/beamlargefiles/apiManager/Response.java
+ com.example.android.beamlargefiles.apiManager.Response
 com/example/android/common/logger/LogNode.java
  com.example.android.common.logger.LogNode
 com/example/android/beamlargefiles/models/Contact.java
  com.example.android.beamlargefiles.models.Contact
-com/example/android/beamlargefiles/BuildConfig.java
- com.example.android.beamlargefiles.BuildConfig
+com/example/android/beamlargefiles/activity/SplashActivity.java
+ com.example.android.beamlargefiles.activity.SplashActivity
 com/example/android/common/logger/Log.java
  com.example.android.common.logger.Log
 com/example/android/common/assetprovider/AssetProvider.java
@@ -51,6 +57,8 @@ com/example/android/beamlargefiles/databinding/ActivityViewTransactionDetailsBin
  com.example.android.beamlargefiles.databinding.ActivityViewTransactionDetailsBinding
 com/example/android/beamlargefiles/activity/ViewTransactionHistoryActivity.java
  com.example.android.beamlargefiles.activity.ViewTransactionHistoryActivity
+com/example/android/beamlargefiles/apiManager/APIManager.java
+ com.example.android.beamlargefiles.apiManager.APIManager
 com/example/android/beamlargefiles/databinding/ActivitySplashBinding.java
  com.example.android.beamlargefiles.databinding.ActivitySplashBinding
 com/example/android/beamlargefiles/databinding/ActivityLoginBinding.java
@@ -60,13 +68,19 @@ com/example/android/beamlargefiles/databinding/CustomPopupBinding.java
 com/example/android/beamlargefiles/activity/DashbordActivity.java
  com.example.android.beamlargefiles.activity.DashbordActivity
  com.example.android.beamlargefiles.activity.DashbordActivity$1
+ com.example.android.beamlargefiles.activity.DashbordActivity$2
+ com.example.android.beamlargefiles.activity.DashbordActivity$3
 com/example/android/beamlargefiles/databinding/HistoryListItemBinding.java
  com.example.android.beamlargefiles.databinding.HistoryListItemBinding
-com/example/android/beamlargefiles/singleton/SingletonClass.java
- com.example.android.beamlargefiles.singleton.SingletonClass
-com/example/android/beamlargefiles/activity/SplashActivity.java
- com.example.android.beamlargefiles.activity.SplashActivity
+com/example/android/beamlargefiles/myreceiver/MyReceiver.java
+ com.example.android.beamlargefiles.myreceiver.MyReceiver
+com/example/android/beamlargefiles/myreceiver/NetworkUtil.java
+ com.example.android.beamlargefiles.myreceiver.NetworkUtil
 com/example/android/beamlargefiles/activity/LoginActivity.java
  com.example.android.beamlargefiles.activity.LoginActivity
  com.example.android.beamlargefiles.activity.LoginActivity$1
  com.example.android.beamlargefiles.activity.LoginActivity$2
+com/example/android/beamlargefiles/singleton/SingletonClass.java
+ com.example.android.beamlargefiles.singleton.SingletonClass
+com/example/android/beamlargefiles/BuildConfig.java
+ com.example.android.beamlargefiles.BuildConfig

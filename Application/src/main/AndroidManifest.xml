@@ -39,6 +39,12 @@
         <activity
             android:name=".activity.ViewTransactionDetailsActivity"
             android:exported="true" />
+        <receiver android:name = ".myreceiver.MyReceiver">
+            <intent-filter>
+                <action android:name = "android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name = "android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
 
         <provider
             android:name="com.example.android.common.assetprovider.AssetProvider"
