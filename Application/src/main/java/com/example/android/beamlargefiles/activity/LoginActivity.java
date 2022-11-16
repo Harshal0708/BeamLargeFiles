@@ -36,11 +36,11 @@ public class LoginActivity extends SampleActivityBase {
         etPass = findViewById(R.id.etPASS);
         btLogin = findViewById(R.id.btLogin);
 
-//        etUname.setText("User1");
-//        etPass.setText("123");
-//        uN="User1";
-//        pS="123";
-//        btLogin.setEnabled(true);
+        etUname.setText("User1");
+        etPass.setText("123");
+        uN="User1";
+        pS="123";
+        btLogin.setEnabled(true);
 
         etUname.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {}

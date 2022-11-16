@@ -3,10 +3,13 @@ package com.example.android.beamlargefiles.activity;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -36,11 +39,15 @@ import android.widget.Toast;
 
 import com.example.android.beamlargefiles.R;
 import com.example.android.beamlargefiles.adapter.MyListAdapter;
+import com.example.android.beamlargefiles.apiManager.APIManager;
+import com.example.android.beamlargefiles.apiManager.SmsResponse;
 import com.example.android.beamlargefiles.models.Contact;
 import com.example.android.beamlargefiles.models.HistoryListItem;
+import com.example.android.beamlargefiles.myreceiver.MyReceiver;
 import com.example.android.beamlargefiles.utils.DatabaseHandler;
 import com.example.android.common.activities.SampleActivityBase;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,6 +69,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DashbordActivity extends SampleActivityBase implements MyListAdapter.ItemClickListener, DatePickerDialog.OnDateSetListener {
     private static final String VCF_DIRECTORY = "/Daily_collection";
@@ -88,6 +100,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
     TextView tv2;
     ArrayList<Object> listdata;
     boolean isSearchDataSave = false;
+    private BroadcastReceiver myReceiver = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,9 +109,13 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 
         isStoragePermissionGranted();
 
+        myReceiver = new MyReceiver();
+        registerReceiver(myReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
             popup();
+
         });
 
         btPickDate = findViewById(R.id.btPickDate);
@@ -322,6 +339,15 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
             }
 
         });
+    }
+
+    public void broadcastIntent() {
+        registerReceiver(myReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(myReceiver);
     }
 
     @Override
@@ -1168,6 +1194,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 
     public void updateAmount(Contact selectedItem, String amount, String buttonEvent, int pos, boolean isBoolean) {
 
+
         if (isBoolean == false) {
             int totalA = selectedItem.getAmount() + Integer.parseInt(amount);
             int totalCollectedAmount = selectedItem.getTotalCollectrdAmount() + Integer.parseInt(amount);
@@ -1213,12 +1240,12 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 
 //            adapter.notifyDataSetChanged();
             if (buttonEvent.equals("sms")) {
-                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                if (selectedItem.getMobile_number().equals("-")) {
-                    sendIntent.setData(Uri.parse("sms:9427868504"));
-                } else {
-                    sendIntent.setData(Uri.parse("sms:" + selectedItem.getMobile_number()));
-                }
+//                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+//                if (selectedItem.getMobile_number().equals("-")) {
+//                    sendIntent.setData(Uri.parse("sms:9427868504"));
+//                } else {
+//                    sendIntent.setData(Uri.parse("sms:" + selectedItem.getMobile_number()));
+//                }
                 String msg = "SITARAM G.MALI Co-Op CRE SOC\n" +
                         "Name - " + updatedItem.getName() + "\n" +
                         "AC. no - " + updatedItem.getSubhasad_code_no() + "\n" +
@@ -1227,21 +1254,60 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
                         "CUR.BAL - " + updatedItem.getAmount() + "\n" +
                         "Last Date - " + updatedItem.getLastpdateDate() + "\n" +
                         "Thank You!!";
-                sendIntent.putExtra("sms_body", msg);
-                startActivity(sendIntent);
+//                sendIntent.putExtra("sms_body", msg);
+//                startActivity(sendIntent);
+
+                String number ;
+
+                if (selectedItem.getMobile_number().equals("-")) {
+                    number = "+919427868504";
+                } else {
+                    number = "+91"+selectedItem.getMobile_number();
+                }
+                Call<SmsResponse> call = APIManager
+                        .getUserManagerService(GsonConverterFactory.create(new GsonBuilder().setLenient().create()))
+                        .pushsms(
+                                number,
+                                "sitaram",
+                                "92QmrvhurcK2",
+                                "SGMALI",
+                                "1201159141994639834",
+                                "1007537675847225564",
+                                msg
+                        );
+                call.enqueue(new Callback<SmsResponse>() {
+
+
+                    @Override
+                    public void onResponse(Call<SmsResponse> call, Response<SmsResponse> response) {
+                            Log.d("test",response.toString());
+                            if(response.body().getStatus().equals("OK")){
+                                Toast.makeText(DashbordActivity.this, "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(DashbordActivity.this, "SMS Not Sent", Toast.LENGTH_SHORT).show();
+                            }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<SmsResponse> call, Throwable t) {
+
+                    }
+                });
+
             } else { //save
                 showAlert("Amount Updated Successfully");
             }
 
         } else {
             if (buttonEvent.equals("sms")) {
-                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                //sendIntent.setData(Uri.parse("sms:8460298962"));
-                if (selectedItem.getMobile_number().equals("-")) {
-                    sendIntent.setData(Uri.parse("sms:9427868504"));
-                } else {
-                    sendIntent.setData(Uri.parse("sms:" + selectedItem.getMobile_number()));
-                }
+//                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+//                //sendIntent.setData(Uri.parse("sms:8460298962"));
+//                if (selectedItem.getMobile_number().equals("-")) {
+//                    sendIntent.setData(Uri.parse("sms:9427868504"));
+//                } else {
+//                    sendIntent.setData(Uri.parse("sms:" + selectedItem.getMobile_number()));
+//                }
                 String msg = "SITARAM G.MALI Co-Op CRE SOC\n" +
                         "Name - " + selectedItem.getName() + "\n" +
                         "AC. no - " + selectedItem.getSubhasad_code_no() + "\n" +
@@ -1250,8 +1316,44 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
                         "CUR.BAL - " + selectedItem.getAmount() + "\n" +
                         "Last Date - " + selectedItem.getLastpdateDate() + "\n" +
                         "Thank You!!";
-                sendIntent.putExtra("sms_body", msg);
-                startActivity(sendIntent);
+//                sendIntent.putExtra("sms_body", msg);
+//                startActivity(sendIntent);
+                String number ;
+                if (selectedItem.getMobile_number().equals("-")) {
+                    number = "+919427868504";
+                } else {
+                    number = "+91"+selectedItem.getMobile_number();
+                }
+                Call<SmsResponse> call = APIManager
+                        .getUserManagerService(GsonConverterFactory.create(new GsonBuilder().setLenient().create()))
+                        .pushsms(
+                                number,
+                                "sitaram",
+                                "92QmrvhurcK2",
+                                "SGMALI",
+                                "1201159141994639834",
+                                "1007537675847225564",
+                                msg
+                        );
+                call.enqueue(new Callback<SmsResponse>() {
+
+
+                    @Override
+                    public void onResponse(Call<SmsResponse> call, Response<SmsResponse> response) {
+                        Log.d("test",response.toString());
+                        if(response.body().getStatus().equals("OK")){
+                            Toast.makeText(DashbordActivity.this, "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(DashbordActivity.this, "SMS Not Sent", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SmsResponse> call, Throwable t) {
+
+                    }
+                });
+
 //            showAlert("Amount Updated Successfully & SMS Sent Successfully");
             }
         }
