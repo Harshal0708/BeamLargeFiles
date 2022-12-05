@@ -109,8 +109,8 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 
         isStoragePermissionGranted();
 
-        myReceiver = new MyReceiver();
-        registerReceiver(myReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+//        myReceiver = new MyReceiver();
+//        registerReceiver(myReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
@@ -347,7 +347,7 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(myReceiver);
+//        unregisterReceiver(myReceiver);
     }
 
     @Override
@@ -956,15 +956,13 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
                 Log.v(TAG, "Permission is granted");
-//                savevCardData();
                 return true;
             } else {
-
                 Log.v(TAG, "Permission is revoked");
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                 return false;
             }
-        } else { //permission is automatically granted on sdk<23 upon installation
+        } else {
             Log.v(TAG, "Permission is granted");
             return true;
         }
@@ -1041,21 +1039,11 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
         }
         String tcc = addZero2 + (int) todayCollectedAmount + addZero112;
         String cDate = getCurrentDate().replace('/', '.');
-//            fw.write("  1000" +
-//                    "," + addZero1 + todayCollectedCount +
-//                    "," + addZero2 + (int) todayCollectedAmount + addZero112 +
-//                    ",001001" +
-//                    "," + cDate +
-//                    "," + "12341234\n");
 
         l.add(new HistoryListItem(00, "  1000" +
                 "," + addZero1 + todayCollectedCount +
-                "," //+ addZero2 + (int) todayCollectedAmount + addZero112
-//                    +tcc+
-                + addTT +
-                ",001001" +
-                "," + cDate +
-                ",12341234" + "\n"));
+                "," + addTT + ",001001" +
+                "," + cDate + ",12341234" + "\n"));
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         String jsonText2 = "{Contact:[" + sp.getString("key", null) + "]}";
         //Converting jsonData string into JSON object
@@ -1194,7 +1182,6 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
 
     public void updateAmount(Contact selectedItem, String amount, String buttonEvent, int pos, boolean isBoolean) {
 
-
         if (isBoolean == false) {
             int totalA = selectedItem.getAmount() + Integer.parseInt(amount);
             int totalCollectedAmount = selectedItem.getTotalCollectrdAmount() + Integer.parseInt(amount);
@@ -1221,7 +1208,6 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
                 }
             }
 
-//            indexValue = pos;
             isSearchDataSave = true;
             setAdapterData(myListData2);
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -1234,130 +1220,71 @@ public class DashbordActivity extends SampleActivityBase implements MyListAdapte
                 mEdit1.putString("key", jsonText2.concat("," + currentItem));
             }
             mEdit1.apply();
-
             setTodayTotal(toDayList);
-//            etSearch.setText("");
-
-//            adapter.notifyDataSetChanged();
             if (buttonEvent.equals("sms")) {
-//                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-//                if (selectedItem.getMobile_number().equals("-")) {
-//                    sendIntent.setData(Uri.parse("sms:9427868504"));
-//                } else {
-//                    sendIntent.setData(Uri.parse("sms:" + selectedItem.getMobile_number()));
-//                }
-                String msg = "SITARAM G.MALI Co-Op CRE SOC\n" +
-                        "Name - " + updatedItem.getName() + "\n" +
-                        "AC. no - " + updatedItem.getSubhasad_code_no() + "\n" +
-                        "PRV. BAL - " + (updatedItem.getAmount() - Integer.parseInt(amount)) + "\n" +
-                        "DEP.AMT - " + amount + "\n" +
-                        "CUR.BAL - " + updatedItem.getAmount() + "\n" +
-                        "Last Date - " + updatedItem.getLastpdateDate() + "\n" +
-                        "Thank You!!";
-//                sendIntent.putExtra("sms_body", msg);
-//                startActivity(sendIntent);
-
-                String number ;
-
-                if (selectedItem.getMobile_number().equals("-")) {
-                    number = "+919427868504";
-                } else {
-                    number = "+91"+selectedItem.getMobile_number();
-                }
-                Call<SmsResponse> call = APIManager
-                        .getUserManagerService(GsonConverterFactory.create(new GsonBuilder().setLenient().create()))
-                        .pushsms(
-                                number,
-                                "sitaram",
-                                "92QmrvhurcK2",
-                                "SGMALI",
-                                "1201159141994639834",
-                                "1007537675847225564",
-                                msg
-                        );
-                call.enqueue(new Callback<SmsResponse>() {
-
-
-                    @Override
-                    public void onResponse(Call<SmsResponse> call, Response<SmsResponse> response) {
-                            Log.d("test",response.toString());
-                            if(response.body().getStatus().equals("OK")){
-                                Toast.makeText(DashbordActivity.this, "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
-                            }else {
-                                Toast.makeText(DashbordActivity.this, "SMS Not Sent", Toast.LENGTH_SHORT).show();
-                            }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<SmsResponse> call, Throwable t) {
-
-                    }
-                });
-
+                sendSMS(updatedItem,amount,selectedItem);
             } else { //save
                 showAlert("Amount Updated Successfully");
             }
-
         } else {
             if (buttonEvent.equals("sms")) {
-//                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-//                //sendIntent.setData(Uri.parse("sms:8460298962"));
-//                if (selectedItem.getMobile_number().equals("-")) {
-//                    sendIntent.setData(Uri.parse("sms:9427868504"));
-//                } else {
-//                    sendIntent.setData(Uri.parse("sms:" + selectedItem.getMobile_number()));
-//                }
-                String msg = "SITARAM G.MALI Co-Op CRE SOC\n" +
-                        "Name - " + selectedItem.getName() + "\n" +
-                        "AC. no - " + selectedItem.getSubhasad_code_no() + "\n" +
-                        "PRV. BAL - " + (selectedItem.getAmount() - Integer.parseInt(amount)) + "\n" +
-                        "DEP.AMT - " + amount + "\n" +
-                        "CUR.BAL - " + selectedItem.getAmount() + "\n" +
-                        "Last Date - " + selectedItem.getLastpdateDate() + "\n" +
-                        "Thank You!!";
-//                sendIntent.putExtra("sms_body", msg);
-//                startActivity(sendIntent);
-                String number ;
-                if (selectedItem.getMobile_number().equals("-")) {
-                    number = "+919427868504";
-                } else {
-                    number = "+91"+selectedItem.getMobile_number();
-                }
-                Call<SmsResponse> call = APIManager
-                        .getUserManagerService(GsonConverterFactory.create(new GsonBuilder().setLenient().create()))
-                        .pushsms(
-                                number,
-                                "sitaram",
-                                "92QmrvhurcK2",
-                                "SGMALI",
-                                "1201159141994639834",
-                                "1007537675847225564",
-                                msg
-                        );
-                call.enqueue(new Callback<SmsResponse>() {
-
-
-                    @Override
-                    public void onResponse(Call<SmsResponse> call, Response<SmsResponse> response) {
-                        Log.d("test",response.toString());
-                        if(response.body().getStatus().equals("OK")){
-                            Toast.makeText(DashbordActivity.this, "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(DashbordActivity.this, "SMS Not Sent", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<SmsResponse> call, Throwable t) {
-
-                    }
-                });
-
-//            showAlert("Amount Updated Successfully & SMS Sent Successfully");
+                sendSMS(selectedItem,amount,selectedItem);
             }
         }
     }
 
+    private void sendSMS(Contact updatedItem,String amount,Contact selectedItem){
+        String msg = "SITARAM G.MALI Co-Op CRE SOC\n" +
+                "Name - " + updatedItem.getName() + "\n" +
+                "AC. no - " + updatedItem.getSubhasad_code_no() + "\n" +
+                "PRV. BAL - " + (updatedItem.getAmount() - Integer.parseInt(amount)) + "\n" +
+                "DEP.AMT - " + amount.toString() + "\n" +
+                "CUR.BAL - " + updatedItem.getAmount() + "\n" +
+                "Last Date - " + updatedItem.getLastpdateDate().toString() + "\n" +
+                "Thank You!!";
+        String msg2 = "SITARAM+G.MALI+Co-Op+CRE+SOC+"
+                +"Name+-+"+ updatedItem.getName()+"+%5C%6E"
+                +"O.+D+-+"+updatedItem.getAddress()+"+%5C%6E"
+                +"AC.+no+-+"+updatedItem.getSubhasad_code_no()+"+%5C%6E"
+                +"PRV.+BAL+-+"+(updatedItem.getAmount() - Integer.parseInt(amount))+"+%5C%6E"
+                +"DEP.AMT+-+"+amount+"+%5C%6E"
+                +"CUR.BAL+-+"+updatedItem.getAmount()+"+%5C%6E"
+                +"Last+Date+-+"+updatedItem.getLastpdateDate()+"+%5C%6E"
+                + "Thank+You%21%21%0ARTtrad";
+        String number;//= "+918460298962" ;
+        if (selectedItem.getMobile_number().equals("-")) {
+            number = "9427868504";
+            Toast.makeText(this, "Phone number is not available for SMS", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            number = selectedItem.getMobile_number();
+        }
+        Log.d("XXX : mob and msg",number+" \n"+msg2);
+        Call<SmsResponse> call = APIManager
+                .getUserManagerService(GsonConverterFactory.create(new GsonBuilder().setLenient().create()))
+                .pushsms(
+                        "sitaram",
+                        "92QmrvhurcK2",
+                        "SGMALI",
+                        "1201159141994639834",
+                        "1007537675847225564",
+                        number,
+                        msg2
+                );
+        call.enqueue(new Callback<SmsResponse>() {
+            @Override
+            public void onResponse(Call<SmsResponse> call, Response<SmsResponse> response) {
+                Log.d("test",response.toString());
+                if(response.body().getStatus().equals("OK")){
+                    Toast.makeText(DashbordActivity.this, "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(DashbordActivity.this, "SMS Not Sent", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<SmsResponse> call, Throwable t) {
+            }
+        });
+    }
 
 }

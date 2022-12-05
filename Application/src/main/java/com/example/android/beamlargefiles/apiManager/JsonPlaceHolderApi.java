@@ -16,13 +16,21 @@ public interface JsonPlaceHolderApi {
 
     @GET("pushsms")
     Call<SmsResponse> pushsms(
-            @Query(value = "mobile" ,encoded=true) String mobile,
             @Query("user") String user,
             @Query("authkey") String authkey,
             @Query("sender") String sender,
             @Query("entityid") String entityid,
             @Query("templateid") String templateid,
+            @Query(value = "mobile") String mobile,
             @Query(value = "text" ,encoded=true) String text
+
+//            "user=sitaram" +
+//                    "&authkey=92QmrvhurcK2" +
+//                    "&sender=SGMALI" +
+//                    "&mobile=mobile1,mobile2" +
+//                    "&text=text" +
+//                    "&entityid=entityid" +
+//                    "&templateid=templateid"
     );
 
 

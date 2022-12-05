@@ -2,10 +2,10 @@ com/example/android/beamlargefiles/databinding/ListItemBinding.java
  com.example.android.beamlargefiles.databinding.ListItemBinding
 com/example/android/beamlargefiles/apiManager/JsonPlaceHolderApi.java
  com.example.android.beamlargefiles.apiManager.JsonPlaceHolderApi
-com/example/android/beamlargefiles/apiManager/SmsResponse.java
- com.example.android.beamlargefiles.apiManager.SmsResponse
 com/example/android/beamlargefiles/utils/DatabaseHandler.java
  com.example.android.beamlargefiles.utils.DatabaseHandler
+com/example/android/beamlargefiles/apiManager/SmsResponse.java
+ com.example.android.beamlargefiles.apiManager.SmsResponse
 com/example/android/common/activities/SampleActivityBase.java
  com.example.android.common.activities.SampleActivityBase
 com/example/android/beamlargefiles/adapter/MyListAdapter.java
@@ -26,17 +26,17 @@ com/example/android/beamlargefiles/apiManager/Response.java
  com.example.android.beamlargefiles.apiManager.Response
 com/example/android/common/logger/LogNode.java
  com.example.android.common.logger.LogNode
-com/example/android/beamlargefiles/models/Contact.java
- com.example.android.beamlargefiles.models.Contact
 com/example/android/beamlargefiles/activity/SplashActivity.java
  com.example.android.beamlargefiles.activity.SplashActivity
+com/example/android/beamlargefiles/models/Contact.java
+ com.example.android.beamlargefiles.models.Contact
 com/example/android/common/logger/Log.java
  com.example.android.common.logger.Log
-com/example/android/common/assetprovider/AssetProvider.java
- com.example.android.common.assetprovider.AssetProvider
 com/example/android/common/logger/LogView.java
  com.example.android.common.logger.LogView
  com.example.android.common.logger.LogView$1
+com/example/android/common/assetprovider/AssetProvider.java
+ com.example.android.common.assetprovider.AssetProvider
 com/example/android/beamlargefiles/databinding/CustomPopup2Binding.java
  com.example.android.beamlargefiles.databinding.CustomPopup2Binding
 com/example/android/beamlargefiles/databinding/CustomviewBinding.java
@@ -69,7 +69,6 @@ com/example/android/beamlargefiles/activity/DashbordActivity.java
  com.example.android.beamlargefiles.activity.DashbordActivity
  com.example.android.beamlargefiles.activity.DashbordActivity$1
  com.example.android.beamlargefiles.activity.DashbordActivity$2
- com.example.android.beamlargefiles.activity.DashbordActivity$3
 com/example/android/beamlargefiles/databinding/HistoryListItemBinding.java
  com.example.android.beamlargefiles.databinding.HistoryListItemBinding
 com/example/android/beamlargefiles/myreceiver/MyReceiver.java

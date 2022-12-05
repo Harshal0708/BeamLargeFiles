@@ -6,122 +6,122 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="16"
-8-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml
+8-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml
 9        android:targetSdkVersion="28" />
-9-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml
+9-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-11-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:8:5-81
-11-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:8:22-78
+11-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:8:5-81
+11-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:8:22-78
 12    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-12-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:9:5-80
-12-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:9:22-77
+12-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:9:5-80
+12-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:9:22-77
 13    <uses-permission android:name="android.permission.INTERNET" />
-13-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:10:5-67
-13-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:10:22-64
+13-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:10:5-67
+13-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:10:22-64
 14    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-14-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:11:5-79
-14-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:11:22-76
+14-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:11:5-79
+14-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:11:22-76
 15
 16    <application
-16-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:13:5-62:19
+16-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:13:5-63:19
 17        android:allowBackup="true"
-17-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:14:9-35
+17-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:14:9-35
 18        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
-18-->[com.android.support:support-compat:28.0.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\6f81025bcc413a318d3343580ec76047\support-compat-28.0.0\AndroidManifest.xml:22:18-91
+18-->[com.android.support:support-compat:28.0.0] /Users/kamalpatel/.gradle/caches/transforms-2/files-2.1/6f81025bcc413a318d3343580ec76047/support-compat-28.0.0/AndroidManifest.xml:22:18-91
 19        android:debuggable="true"
 20        android:icon="@mipmap/ic_launcher"
-20-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:15:9-43
+20-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:15:9-43
 21        android:label="@string/app_name"
-21-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:16:9-41
+21-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:16:9-41
 22        android:testOnly="true"
 23        android:theme="@style/AppTheme"
-23-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:17:9-40
+23-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:17:9-40
 24        android:usesCleartextTraffic="true" >
-24-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:18:9-44
+24-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:18:9-44
 25        <activity
-25-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:19:9-26:20
+25-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:19:9-26:20
 26            android:name="com.example.android.beamlargefiles.activity.SplashActivity"
-26-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:20:13-52
+26-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:20:13-52
 27            android:exported="true" >
-27-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:21:13-36
+27-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:21:13-36
 28            <intent-filter>
-28-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:22:13-25:29
+28-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:22:13-25:29
 29                <action android:name="android.intent.action.MAIN" />
-29-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:23:17-69
-29-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:23:25-66
+29-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:23:17-69
+29-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:23:25-66
 30
 31                <category android:name="android.intent.category.LAUNCHER" />
-31-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:24:17-77
-31-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:24:27-74
+31-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:24:17-77
+31-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:24:27-74
 32            </intent-filter>
 33        </activity>
 34        <activity
-34-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:27:9-30:20
+34-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:27:9-30:20
 35            android:name="com.example.android.beamlargefiles.activity.LoginActivity"
-35-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:28:13-51
+35-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:28:13-51
 36            android:exported="true" >
-36-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:29:13-36
+36-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:29:13-36
 37        </activity>
 38        <activity
-38-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:31:9-35:20
+38-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:31:9-35:20
 39            android:name="com.example.android.beamlargefiles.activity.DashbordActivity"
-39-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:33:13-54
+39-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:33:13-54
 40            android:exported="true"
-40-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:34:13-36
+40-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:34:13-36
 41            android:windowSoftInputMode="stateHidden" >
-41-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:32:13-54
+41-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:32:13-54
 42        </activity>
 43        <activity
-43-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:36:9-38:40
+43-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:36:9-38:40
 44            android:name="com.example.android.beamlargefiles.activity.ViewTransactionHistoryActivity"
-44-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:37:13-68
+44-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:37:13-68
 45            android:exported="false" />
-45-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:38:13-37
+45-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:38:13-37
 46        <activity
-46-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:39:9-41:39
+46-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:39:9-41:39
 47            android:name="com.example.android.beamlargefiles.activity.ViewTransactionDetailsActivity"
-47-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:40:13-68
+47-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:40:13-68
 48            android:exported="true" />
-48-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:41:13-36
+48-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:41:13-36
 49
 50        <receiver android:name="com.example.android.beamlargefiles.myreceiver.MyReceiver" >
-50-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:42:9-47:20
-50-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:42:19-58
+50-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:42:9-47:20
+50-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:42:19-58
 51            <intent-filter>
-51-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:43:13-46:29
+51-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:43:13-46:29
 52                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-52-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:44:17-81
-52-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:44:25-78
+52-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:44:17-81
+52-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:44:25-78
 53                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
-53-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:45:17-80
-53-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:45:25-77
+53-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:45:17-80
+53-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:45:25-77
 54            </intent-filter>
 55        </receiver>
 56
 57        <provider
-57-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:49:9-52:39
+57-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:49:9-52:39
 58            android:name="com.example.android.common.assetprovider.AssetProvider"
-58-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:50:13-82
+58-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:50:13-82
 59            android:authorities="com.example.android.beamlargefiles.files"
-59-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:51:13-75
+59-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:51:13-75
 60            android:exported="true" />
-60-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:52:13-36
+60-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:52:13-36
 61        <provider
 62            android:name="android.support.v4.content.FileProvider"
-62-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:54:13-67
+62-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:54:13-67
 63            android:authorities="com.example.android.beamlargefiles.provider"
-63-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:55:13-60
+63-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:55:13-60
 64            android:exported="false"
-64-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:56:13-37
+64-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:56:13-37
 65            android:grantUriPermissions="true" >
-65-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:57:13-47
+65-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:57:13-47
 66            <meta-data
-66-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:58:13-60:58
+66-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:58:13-60:58
 67                android:name="android.support.FILE_PROVIDER_PATHS"
-67-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:59:17-67
+67-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:59:17-67
 68                android:resource="@xml/provider_paths" />
-68-->C:\Users\admin\Downloads\Compressed\BeamLargeFiles\Application\src\main\AndroidManifest.xml:60:17-55
+68-->/Volumes/Data 1/Desktop/BeamLargeFiles/Application/src/main/AndroidManifest.xml:60:17-55
 69        </provider>
 70    </application>
 71
